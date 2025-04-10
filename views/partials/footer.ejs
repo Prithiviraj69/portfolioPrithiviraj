@@ -1,0 +1,34 @@
+</main>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="copyright">
+        <p>Designed and built by <%= locals.profile ? profile.fullName : 'Your Name' %> © <%= new Date().getFullYear() %>. All rights reserved.</p>
+      </div>
+      <div class="social-links">
+        <% if (locals.profile && profile.socialLinks) { %>
+          <% if (profile.socialLinks.github) { %>
+            <a href="<%= profile.socialLinks.github %>" target="_blank"><i class="fab fa-github"></i></a>
+          <% } %>
+          <% if (profile.socialLinks.linkedin) { %>
+            <a href="<%= profile.socialLinks.linkedin %>" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <% } %>
+          <% if (profile.socialLinks.twitter) { %>
+            <a href="<%= profile.socialLinks.twitter %>" target="_blank"><i class="fab fa-twitter"></i></a>
+          <% } %>
+          <% if (profile.socialLinks.email) { %>
+            <a href="mailto:<%= profile.socialLinks.email %>"><i class="fas fa-envelope"></i></a>
+          <% } %>
+        <% } else { %>
+          <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fas fa-envelope"></i></a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="/js/main.js"></script>
+</body>
+</html>

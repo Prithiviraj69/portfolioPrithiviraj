@@ -1,0 +1,87 @@
+<%- include('../partials/header') %>
+
+<section class="skills">
+  <div class="container">
+    <div class="section-header">
+      <h2>MY SKILLS</h2>
+      <h3>My Technical Skills</h3>
+    </div>
+    
+    <div class="skills-filter">
+      <button class="filter-btn <%= activeCategory === 'ALL' ? 'active' : '' %>" data-filter="all">ALL</button>
+      <% if (locals.categories && categories.length > 0) { %>
+        <% categories.forEach(category => { %>
+          <button class="filter-btn <%= activeCategory === category ? 'active' : '' %>" data-filter="<%= category.toLowerCase() %>"><%= category %></button>
+        <% }) %>
+      <% } else { %>
+        <button class="filter-btn" data-filter="frontend">FRONT-END</button>
+        <button class="filter-btn" data-filter="backend">BACK-END</button>
+        <button class="filter-btn" data-filter="cloud">CLOUD</button>
+      <% } %>
+    </div>
+    
+    <div class="skills-grid">
+      <% if (locals.skills && skills.length > 0) { %>
+        <% skills.forEach(skill => { %>
+          <div class="skill-card" data-category="<%= skill.category.toLowerCase() %>">
+            <div class="skill-icon">
+              <img src="<%= skill.icon %>" alt="<%= skill.name %>">
+            </div>
+            <h4><%= skill.name %></h4>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div class="skill-card" data-category="frontend">
+          <div class="skill-icon">
+            <i class="fab fa-html5"></i>
+          </div>
+          <h4>HTML</h4>
+        </div>
+        <div class="skill-card" data-category="frontend">
+          <div class="skill-icon">
+            <i class="fab fa-css3-alt"></i>
+          </div>
+          <h4>CSS</h4>
+        </div>
+        <div class="skill-card" data-category="frontend">
+          <div class="skill-icon">
+            <i class="fab fa-js"></i>
+          </div>
+          <h4>JavaScript</h4>
+        </div>
+        <div class="skill-card" data-category="backend">
+          <div class="skill-icon">
+            <i class="fas fa-database"></i>
+          </div>
+          <h4>SQL Server</h4>
+        </div>
+        <div class="skill-card" data-category="backend">
+          <div class="skill-icon">
+            <i class="fab fa-microsoft"></i>
+          </div>
+          <h4>ASP.NET MVC</h4>
+        </div>
+        <div class="skill-card" data-category="backend">
+          <div class="skill-icon">
+            <i class="fab fa-microsoft"></i>
+          </div>
+          <h4>.NET Core</h4>
+        </div>
+        <div class="skill-card" data-category="frontend">
+          <div class="skill-icon">
+            <i class="fab fa-react"></i>
+          </div>
+          <h4>React</h4>
+        </div>
+        <div class="skill-card" data-category="cloud">
+          <div class="skill-icon">
+            <i class="fab fa-git-alt"></i>
+          </div>
+          <h4>Git</h4>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,553 @@
+<%- include('../partials/header') %>
+
+<!-- Hero Section -->
+<section id="home" class="hero-section">
+  <div class="home-container">
+    <div class="profile-section">
+      <div class="profile-image-container">
+        <img src="<%= locals.profile && profile.avatar ? profile.avatar : '/images/default-avatar.png' %>" alt="<%= locals.profile ? profile.fullName : 'Profile Image' %>" class="profile-image">
+      </div>
+      
+      <div class="profile-intro">
+        <h1>Hey there, I'm <span class="text-animation-container">
+          <span class="text-animation" data-text-1="<%= locals.profile ? profile.fullName : 'Your Name' %>" data-text-2="<%= locals.profile ? profile.fullName : 'Professional Developer' %>" title="Click to change style or pause animation">
+            <%= locals.profile ? profile.fullName : 'Your Name' %>
+          </span>
+        </span></h1>
+        
+        <div class="bio-text">
+          <% if (locals.profile && profile.bio) { %>
+            <p><%= profile.bio %></p>
+          <% } else { %>
+            <p>I'm an experienced software developer skilled in web development. With a track record of delivering high-quality solutions, I specialize in dynamic web applications and robust server-side development.</p>
+          <% } %>
+        </div>
+        
+        <div class="action-buttons">
+          <% if (locals.profile && profile.resumeUrl) { %>
+            <a href="<%= profile.resumeUrl %>" class="btn btn-primary" target="_blank">Resume</a>
+          <% } %>
+          
+          <% if (locals.profile && profile.socialLinks && profile.socialLinks.whatsapp) { %>
+            <a href="https://wa.me/<%= profile.socialLinks.whatsapp %>" class="btn btn-whatsapp" target="_blank">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="about-section">
+  <div class="container">
+    <div class="about-header">
+      <div class="about-button">ALL ABOUT ME AND MY EXPERIENCE</div>
+      <h2 class="about-title">Explore My Journey's Highlights In A Glance.</h2>
+    </div>
+    
+    <div class="about-tabs-container">
+      <div class="about-tabs">
+        <button class="about-tab-btn active" data-tab="about">About me</button>
+        <button class="about-tab-btn" data-tab="experience">Experience</button>
+        <button class="about-tab-btn" data-tab="education">Education</button>
+      </div>
+      
+      <div class="about-content-container">
+        <div class="about-image-container">
+          <img src="/images/user.jpg" alt="Profile Image" class="about-image">
+        </div>
+        
+        <div class="about-tab-content">
+          <!-- About Me Tab -->
+          <div class="about-tab-pane active" id="about-tab">
+            <div class="timeline-content">
+              <% if (locals.profile && profile.aboutMe) { %>
+                <% 
+                  // Split the aboutMe text by periods to create separate sentences
+                  const sentences = profile.aboutMe.split('.').filter(sentence => sentence.trim() !== '');
+                %>
+                <% sentences.forEach(sentence => { %>
+                  <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <p><%= sentence.trim() %>.</p>
+                  </div>
+                <% }) %>
+              <% } else { %>
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <p>Greetings! Currently serving as a Software Engineer at Radixweb.</p>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <p>Holding a Master's degree in Computer Applications from Sardar Patel University, Gujarat (2020-2022), I've improved my skills set in various technologies, including Dotnet MVC, Blazor, and ReactJS and Angular.</p>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <p>My expertise spans both front-end and back-end development, with a focus on crafting efficient and scalable solutions.</p>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <p>I thrive on tackling challenges in API integration and optimizing performance.</p>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <p>Leveraging my proficiency in version control systems like Git and TFS, I ensure smooth collaboration and streamlined code management within teams.</p>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <p>Throughout my career, I've had the privilege of working on diverse projects.</p>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <p>Let's connect and explore how I can bring value to your projects with my expertise and experience.</p>
+                </div>
+              <% } %>
+            </div>
+          </div>
+          
+          <!-- Experience Tab -->
+          <div class="about-tab-pane" id="experience-tab">
+            <div class="timeline-content">
+              <% if (locals.profile && profile.experience && profile.experience.length > 0) { %>
+                <% profile.experience.forEach((exp, index) => { %>
+                  <div class="timeline-item">
+                    <div class="timeline-dot code-dot"></div>
+                    <div class="timeline-info">
+                      <h4><%= exp.position %></h4>
+                      <h5><%= exp.company %></h5>
+                      <div class="timeline-details">
+                        <span><%= exp.duration %></span>
+                        <% if (exp.description && exp.description.includes(',')) { %>
+                          <span><%= exp.description.split(',')[0] %></span>
+                        <% } %>
+                      </div>
+                    </div>
+                  </div>
+                <% }) %>
+              <% } else { %>
+                <div class="timeline-item">
+                  <div class="timeline-dot code-dot"></div>
+                  <div class="timeline-info">
+                    <h4>Software Engineer</h4>
+                    <h5>Radixweb</h5>
+                    <div class="timeline-details">
+                      <span>Jan 2025 - Present</span>
+                      <span>Ahmedabad - Gujarat</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot code-dot"></div>
+                  <div class="timeline-info">
+                    <h4>Software Developer</h4>
+                    <h5>Binary Republik</h5>
+                    <div class="timeline-details">
+                      <span>June 2024 - Dec 2024</span>
+                      <span>Ahmedabad - Gujarat</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot code-dot"></div>
+                  <div class="timeline-info">
+                    <h4>Jr. Software Developer</h4>
+                    <h5>Bigscal Technologies Pvt. Ltd.</h5>
+                    <div class="timeline-details">
+                      <span>Dec 2021 - May 2024</span>
+                      <span>Surat - Gujarat</span>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+            </div>
+          </div>
+          
+          <!-- Education Tab -->
+          <div class="about-tab-pane" id="education-tab">
+            <div class="timeline-content">
+              <% if (locals.profile && profile.education && profile.education.length > 0) { %>
+                <% profile.education.forEach((edu, index) => { %>
+                  <div class="timeline-item">
+                    <div class="timeline-dot edu-dot"></div>
+                    <div class="timeline-info">
+                      <h4><%= edu.degree %></h4>
+                      <h5><%= edu.institution %> <% if (edu.description && edu.description.includes('GPA')) { %><%= edu.description %><% } %></h5>
+                      <div class="timeline-details">
+                        <span><%= edu.year %></span>
+                      </div>
+                    </div>
+                  </div>
+                <% }) %>
+              <% } else { %>
+                <div class="timeline-item">
+                  <div class="timeline-dot edu-dot"></div>
+                  <div class="timeline-info">
+                    <h4>Masters in Computer Applications</h4>
+                    <h5>Sardar Patel University (8.6 CGPA)</h5>
+                    <div class="timeline-details">
+                      <span>2020-2022</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot edu-dot"></div>
+                  <div class="timeline-info">
+                    <h4>Bachelor's in Computer Applications</h4>
+                    <h5>Veer Narmad South Gujrat University (7.9 CGPA)</h5>
+                    <div class="timeline-details">
+                      <span>2017-2020</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot edu-dot"></div>
+                  <div class="timeline-info">
+                    <h4>H.S.C</h4>
+                    <h5>Saraswati Hindi Vidhyalay (83%)</h5>
+                    <div class="timeline-details">
+                      <span>2016-2017</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot edu-dot"></div>
+                  <div class="timeline-info">
+                    <h4>S.S.C</h4>
+                    <h5>Saraswati Hindi Vidhyalay (76.5%)</h5>
+                    <div class="timeline-details">
+                      <span>2014-2015</span>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Projects Section -->
+<section id="projects" class="projects-section">
+  <div class="container">
+    <div class="projects-header">
+      <div class="projects-button">MY PROJECTS</div><br>
+      <h2 class="projects-title">Discover My Creative Projects</h2>
+      <p class="projects-subtitle">Discover my passion for innovation through meticulously crafted projects, where creativity meets attention to detail.</p>
+    </div>
+    
+    <div class="projects-filter">
+      <button class="project-filter-btn active" data-filter="all">ALL</button>
+      <% 
+        // Extract unique categories from projects
+        let categories = [];
+        if (locals.projects && projects.length > 0) {
+          categories = [...new Set(projects.map(project => project.category))];
+        }
+      %>
+      <% if (categories.length > 0) { %>
+        <% categories.forEach(category => { %>
+          <button class="project-filter-btn" data-filter="<%= category.toLowerCase().replace(/\s+/g, '-') %>"><%= category %></button>
+        <% }) %>
+      <% } else { %>
+        <button class="project-filter-btn" data-filter="dotnet-core">DOTNET CORE</button>
+        <button class="project-filter-btn" data-filter="dotnet-mvc">DOTNET MVC</button>
+        <button class="project-filter-btn" data-filter="blazor">BLAZOR</button>
+        <button class="project-filter-btn" data-filter="react">REACT</button>
+      <% } %>
+    </div>
+    
+    <div class="projects-grid">
+      <% if (locals.projects && projects.length > 0) { %>
+        <% projects.forEach(project => { %>
+          <div class="project-card" data-category="<%= project.category.toLowerCase().replace(/\s+/g, '-') %>">
+            <div class="project-image">
+              <img src="<%= project.coverImage %>" alt="<%= project.title %>">
+            </div>
+            <div class="project-info">
+              <h3 class="project-title">
+                <% if (project.demoUrl) { %>
+                  <a href="<%= project.demoUrl %>" target="_blank"><%= project.title %></a>
+                <% } else { %>
+                  <%= project.title %>
+                <% } %>
+              </h3>
+              <p class="project-description"><%= project.description %></p>
+              <div class="project-tech">
+                <p class="tech-label">TechStack :</p>
+                <p class="tech-list"><%= project.techStack.join(', ') %></p>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div class="project-card" data-category="dotnet-core">
+          <div class="project-image">
+            <img src="/images/project1.jpg" alt="Priority Couriers">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">
+              <a href="#" target="_blank">Priority Couriers</a>
+            </h3>
+            <p class="project-description">Developed RESTful APIs in .NET Core for Amazon Selling Partner integration. Designed and optimized database structures for improved performance. Implemented table structure based on Amazon schema models.</p>
+            <div class="project-tech">
+              <p class="tech-label">TechStack :</p>
+              <p class="tech-list">.NET Core, SQL Server, Stripe, EF Core, REST API, Azure Devops, xUnit Testing, Cloudflare, OData, OAuth</p>
+            </div>
+          </div>
+        </div>
+        <div class="project-card" data-category="dotnet-core">
+          <div class="project-image">
+            <img src="/images/project2.jpg" alt="Dice Fanatics">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">
+              <a href="#" target="_blank">Dice Fanatics</a>
+            </h3>
+            <p class="project-description">Developed an online marketplace for dice enthusiasts to buy, sell, and trade dice collections. It allows users to showcase their collections, connect with other dice fans, and search for specific dice sets. The platform facilitates secure transactions and includes features like friend requests and ISO (In Search Of) listings to help users find the dice they desire. Conducted xUnit testing, and provided debugging support.</p>
+            <div class="project-tech">
+              <p class="tech-label">TechStack :</p>
+              <p class="tech-list">.NET Core, SQL Server, Stripe, EF Core, REST API, Azure Devops, xUnit Testing, Cloudflare, OData, OAuth</p>
+            </div>
+          </div>
+        </div>
+        <div class="project-card" data-category="blazor">
+          <div class="project-image">
+            <img src="/images/project3.jpg" alt="ErpCrebit">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">
+              <a href="#" target="_blank">ErpCrebit</a>
+            </h3>
+            <p class="project-description">ErpCrebit is an industry-wide computer software system used to manage and coordinate all the clients resources, information and functions of business from shared data stores. It includes payroll, free customization, Project Management, multi-process billing, licensing and cloud based enterprise resource planning for all business.</p>
+            <div class="project-tech">
+              <p class="tech-label">TechStack :</p>
+              <p class="tech-list">Blazor & .Net Core 6, SQL Server, REST API, TFS, Asp.Net MVC, HTML, CSS, Javascript, jQuery, Ajax</p>
+            </div>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+
+<!-- Skills Section -->
+<section id="skills" class="skills-section">
+  <div class="container">
+    <div class="skills-header">
+      <h2 class="skills-title">My Technical Skills</h2>
+    </div>
+    
+    <div class="skills-filter">
+      <button class="skill-filter-btn active" data-filter="all">ALL</button>
+      <% 
+        // Extract unique skill categories
+        let skillCategories = [];
+        if (locals.profile && profile.skills && profile.skills.length > 0) {
+          skillCategories = [...new Set(profile.skills.map(skill => skill.category))];
+        }
+      %>
+      <% if (skillCategories.length > 0) { %>
+        <% skillCategories.forEach(category => { %>
+          <button class="skill-filter-btn" data-filter="<%= category.toLowerCase().replace(/[^\w]+/g, '-') %>"><%= category %></button>
+        <% }) %>
+      <% } else { %>
+        <button class="skill-filter-btn" data-filter="front-end">FRONT-END</button>
+        <button class="skill-filter-btn" data-filter="back-end">BACK-END</button>
+        <button class="skill-filter-btn" data-filter="cloud">CLOUD</button>
+      <% } %>
+    </div>
+    
+    <div class="skills-grid">
+      <% if (locals.profile && profile.skills && profile.skills.length > 0) { %>
+        <% profile.skills.forEach(skill => { %>
+          <div class="skill-card" data-category="<%= skill.category.toLowerCase().replace(/[^\w]+/g, '-') %>">
+            <div class="skill-icon">
+              <img src="<%= skill.icon %>" alt="<%= skill.name %>">
+            </div>
+            <div class="skill-name"><%= skill.name %></div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <!-- Frontend Skills -->
+        <div class="skill-card" data-category="front-end">
+          <div class="skill-icon">
+            <img src="/images/skills/html.png" alt="HTML">
+          </div>
+          <div class="skill-name">HTML</div>
+        </div>
+        <div class="skill-card" data-category="front-end">
+          <div class="skill-icon">
+            <img src="/images/skills/css.png" alt="CSS">
+          </div>
+          <div class="skill-name">CSS</div>
+        </div>
+        <div class="skill-card" data-category="front-end">
+          <div class="skill-icon">
+            <img src="/images/skills/javascript.png" alt="JavaScript">
+          </div>
+          <div class="skill-name">JavaScript</div>
+        </div>
+        <div class="skill-card" data-category="front-end">
+          <div class="skill-icon">
+            <img src="/images/skills/react.png" alt="React">
+          </div>
+          <div class="skill-name">React</div>
+        </div>
+        <div class="skill-card" data-category="front-end">
+          <div class="skill-icon">
+            <img src="/images/skills/jquery.png" alt="jQuery">
+          </div>
+          <div class="skill-name">jQuery</div>
+        </div>
+        
+        <!-- Backend Skills -->
+        <div class="skill-card" data-category="back-end">
+          <div class="skill-icon">
+            <img src="/images/skills/dotnet-core.png" alt=".NET Core">
+          </div>
+          <div class="skill-name">.NET Core</div>
+        </div>
+        <div class="skill-card" data-category="back-end">
+          <div class="skill-icon">
+            <img src="/images/skills/csharp.png" alt="C#">
+          </div>
+          <div class="skill-name">C#</div>
+        </div>
+        <div class="skill-card" data-category="back-end">
+          <div class="skill-icon">
+            <img src="/images/skills/sql-server.png" alt="SQL Server">
+          </div>
+          <div class="skill-name">SQL Server</div>
+        </div>
+        <div class="skill-card" data-category="back-end">
+          <div class="skill-icon">
+            <img src="/images/skills/ef-core.png" alt="EF Core">
+          </div>
+          <div class="skill-name">EF Core</div>
+        </div>
+        
+        <!-- Cloud Skills -->
+        <div class="skill-card" data-category="cloud">
+          <div class="skill-icon">
+            <img src="/images/skills/git.png" alt="GIT">
+          </div>
+          <div class="skill-name">GIT</div>
+        </div>
+        <div class="skill-card" data-category="cloud">
+          <div class="skill-icon">
+            <img src="/images/skills/tfs.png" alt="TFS">
+          </div>
+          <div class="skill-name">TFS</div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+
+<!-- Contact Section -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>GET IN TOUCH</h2><br>
+      <h3>Contact Me</h3>
+      <p>If you wish to reach out to me please feel free to leave your mail here</p>
+    </div>
+    <div class="contact-content">
+      <div class="contact-image">
+        <img src="/images/contact.svg" alt="Contact">
+      </div>
+      <div class="contact-form">
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="John Doe" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email <span class="required">*</span></label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="Your subject">
+          </div>
+          <div class="form-group">
+            <label for="message">Your message <span class="required">*</span></label>
+            <textarea id="message" name="message" placeholder="Drop your message here" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send email</button>
+        </form>
+        <div id="formMessage" class="form-message"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // About tabs functionality
+    const aboutTabBtns = document.querySelectorAll('.about-tab-btn');
+    const aboutTabPanes = document.querySelectorAll('.about-tab-pane');
+    
+    aboutTabBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        // Remove active class from all buttons and panes
+        aboutTabBtns.forEach(b => b.classList.remove('active'));
+        aboutTabPanes.forEach(p => p.classList.remove('active'));
+        
+        // Add active class to clicked button
+        this.classList.add('active');
+        
+        // Get the tab id and show the corresponding pane
+        const tabId = this.getAttribute('data-tab');
+        document.getElementById(`${tabId}-tab`).classList.add('active');
+      });
+    });
+    
+    // Contact form submission
+    const contactForm = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
+    
+    if (contactForm) {
+      contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = {
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          subject: document.getElementById('subject').value,
+          message: document.getElementById('message').value
+        };
+        
+        try {
+          const response = await fetch('/contact', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          });
+          
+          const data = await response.json();
+          
+          if (data.success) {
+            formMessage.innerHTML = '<div class="alert alert-success">Message sent successfully! I will get back to you soon.</div>';
+            contactForm.reset();
+          } else {
+            formMessage.innerHTML = `<div class="alert alert-error">${data.message || 'Something went wrong. Please try again.'}</div>`;
+          }
+        } catch (err) {
+          formMessage.innerHTML = '<div class="alert alert-error">Something went wrong. Please try again.</div>';
+        }
+      });
+    }
+  });
+</script>
+
+<%- include('../partials/footer') %>

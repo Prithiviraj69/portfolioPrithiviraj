@@ -1,0 +1,91 @@
+<%- include('../partials/header') %>
+
+<section class="projects">
+  <div class="container">
+    <div class="section-header">
+      <h2>MY PROJECTS</h2>
+      <h3>Discover My Creative Projects</h3>
+      <p>Discover my passion for innovation through meticulously crafted projects, where creativity meets attention to detail.</p>
+    </div>
+    
+    <div class="projects-filter">
+      <button class="filter-btn <%= activeCategory === 'ALL' ? 'active' : '' %>" data-filter="all">ALL</button>
+      <% if (locals.categories && categories.length > 0) { %>
+        <% categories.forEach(category => { %>
+          <button class="filter-btn <%= activeCategory === category ? 'active' : '' %>" data-filter="<%= category.toLowerCase() %>"><%= category %></button>
+        <% }) %>
+      <% } else { %>
+        <button class="filter-btn" data-filter="dotnet">DOTNET CORE</button>
+        <button class="filter-btn" data-filter="mvc">DOTNET MVC</button>
+        <button class="filter-btn" data-filter="blazor">BLAZOR</button>
+        <button class="filter-btn" data-filter="react">REACT</button>
+      <% } %>
+    </div>
+    
+    <div class="projects-grid">
+      <% if (locals.projects && projects.length > 0) { %>
+        <% projects.forEach(project => { %>
+          <div class="project-card" data-category="<%= project.category.toLowerCase() %>">
+            <div class="project-image">
+              <img src="<%= project.coverImage %>" alt="<%= project.title %>">
+            </div>
+            <div class="project-info">
+              <h4><%= project.title %></h4>
+              <p><%= project.description.substring(0, 150) %>...</p>
+              <div class="tech-stack">
+                <strong>TechStack :</strong>
+                <p><%= project.techStack.join(', ') %></p>
+              </div>
+              <a href="/projects/<%= project.slug %>" class="btn btn-sm">View Project</a>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div class="project-card" data-category="dotnet">
+          <div class="project-image">
+            <img src="/images/project1.jpg" alt="Priority Couriers">
+          </div>
+          <div class="project-info">
+            <h4>Priority Couriers</h4>
+            <p>Developed RESTful APIs in .NET Core for Amazon Selling Partner integration and optimized database structures for improved performance.</p>
+            <div class="tech-stack">
+              <strong>TechStack :</strong>
+              <p>.NET Core, SQL Server, Stripe, EF Core, REST API</p>
+            </div>
+            <a href="/projects/priority-couriers" class="btn btn-sm">View Project</a>
+          </div>
+        </div>
+        <div class="project-card" data-category="dotnet">
+          <div class="project-image">
+            <img src="/images/project2.jpg" alt="Dice Fanatics">
+          </div>
+          <div class="project-info">
+            <h4>Dice Fanatics</h4>
+            <p>Developed an online marketplace for dice enthusiasts to buy, sell, and trade collections.</p>
+            <div class="tech-stack">
+              <strong>TechStack :</strong>
+              <p>.NET Core, SQL Server, Stripe, EF Core, REST API</p>
+            </div>
+            <a href="/projects/dice-fanatics" class="btn btn-sm">View Project</a>
+          </div>
+        </div>
+        <div class="project-card" data-category="blazor">
+          <div class="project-image">
+            <img src="/images/project3.jpg" alt="ErpCrebit">
+          </div>
+          <div class="project-info">
+            <h4>ErpCrebit</h4>
+            <p>ErpCrebit is an industry-wide computer software system used to manage and coordinate all the clients resources, information and functions.</p>
+            <div class="tech-stack">
+              <strong>TechStack :</strong>
+              <p>Blazor & .Net Core 6, SQL Server, REST API, TFS</p>
+            </div>
+            <a href="/projects/erpcrebit" class="btn btn-sm">View Project</a>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

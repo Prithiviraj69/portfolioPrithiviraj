@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Setup</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+      background-color: var(--bg-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    .setup-container {
+      background-color: var(--bg-color);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      width: 100%;
+      max-width: 600px;
+    }
+    
+    .setup-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .setup-header h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+    
+    .setup-steps {
+      margin-bottom: 30px;
+    }
+    
+    .setup-step {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .setup-step:last-child {
+      border-bottom: none;
+    }
+    
+    .setup-step h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      margin-right: 10px;
+      font-size: 0.9rem;
+    }
+    
+    .setup-actions {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="setup-container">
+    <div class="setup-header">
+      <h1>Portfolio Setup</h1>
+      <p>Follow these steps to set up your portfolio website</p>
+    </div>
+    
+    <div class="setup-steps">
+      <div class="setup-step">
+        <h2><span class="step-number">1</span> Create Admin Account</h2>
+        <p>First, you need to create an admin account to manage your portfolio.</p>
+        <a href="/auth/setup-admin" class="btn btn-primary">Create Admin Account</a>
+      </div>
+      
+      <div class="setup-step">
+        <h2><span class="step-number">2</span> Update Your Profile</h2>
+        <p>After creating your admin account, update your profile information, including your personal details, education, experience, and skills.</p>
+      </div>
+      
+      <div class="setup-step">
+        <h2><span class="step-number">3</span> Add Your Projects</h2>
+        <p>Add your projects to showcase your work. Include project details, images, and links to demos or repositories.</p>
+      </div>
+      
+      <div class="setup-step">
+        <h2><span class="step-number">4</span> Customize Your Portfolio</h2>
+        <p>Customize the appearance of your portfolio by updating the CSS styles in the public/css/style.css file.</p>
+      </div>
+    </div>
+    
+    <div class="setup-actions">
+      <a href="/" class="btn btn-outline">Go to Homepage</a>
+    </div>
+  </div>
+</body>
+</html>

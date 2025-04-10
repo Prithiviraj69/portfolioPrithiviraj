@@ -1,0 +1,640 @@
+<%- include('../partials/header') %>
+
+<section class="admin-profile">
+  <div class="container">
+    <div class="admin-header">
+      <h2>Edit Profile</h2>
+      <a href="/auth/logout" class="btn btn-outline">Logout</a>
+    </div>
+    
+    <div class="admin-nav">
+      <a href="/admin/dashboard" class="admin-nav-item">Dashboard</a>
+      <a href="/admin/profile" class="admin-nav-item active">Profile</a>
+      <a href="/admin/projects" class="admin-nav-item">Projects</a>
+      <a href="/admin/messages" class="admin-nav-item">Messages</a>
+    </div>
+    
+    <div class="profile-form-container">
+      <form id="profileForm" class="admin-form" action="/admin/profile" method="POST" enctype="multipart/form-data" data-reset="false">
+        <div class="form-section">
+          <h3>Basic Information</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" name="fullName" value="<%= profile.fullName %>" required>
+            </div>
+            <div class="form-group">
+              <label for="title">Professional Title</label>
+              <input type="text" id="title" name="title" value="<%= profile.title %>" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="bio">Bio</label>
+            <p class="form-help">Short bio for the homepage. Keep it concise and engaging.</p>
+            <textarea id="bio" name="bio" rows="4" required><%= profile.bio %></textarea>
+          </div>
+          <div class="form-group">
+            <label for="aboutMe">About Me</label>
+            <p class="form-help">Detailed information for the About section. For best display, consider adding 3 paragraphs separated by blank lines.</p>
+            <textarea id="aboutMe" name="aboutMe" rows="8"><%= profile.aboutMe || '' %></textarea>
+          </div>
+          <div class="form-group">
+            <label for="avatar">Profile Picture</label>
+            <input type="file" id="avatar" name="avatar" accept="image/*">
+            <% if (profile.avatar) { %>
+              <div class="current-image">
+                <p>Current image:</p>
+                <img src="<%= profile.avatar %>" alt="Current profile picture" style="max-width: 100px; margin-top: 10px;">
+              </div>
+            <% } %>
+          </div>
+        </div>
+        
+        <div class="form-section">
+          <h3>Education</h3>
+          <p class="form-help">For the new About section design, include degree, institution, year, and GPA/percentage in the description field (e.g., "8.6 CGPA" or "85%").</p>
+          <div id="educationContainer">
+            <% if (profile.education && profile.education.length > 0) { %>
+              <% profile.education.forEach((edu, index) => { %>
+                <div class="education-item">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="edu-degree-<%= index %>">Degree</label>
+                      <input type="text" id="edu-degree-<%= index %>" class="edu-degree" value="<%= edu.degree %>" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="edu-institution-<%= index %>">Institution</label>
+                      <input type="text" id="edu-institution-<%= index %>" class="edu-institution" value="<%= edu.institution %>" required>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="edu-year-<%= index %>">Year</label>
+                      <input type="text" id="edu-year-<%= index %>" class="edu-year" value="<%= edu.year %>" required placeholder="e.g., 2020-2022">
+                    </div>
+                    <div class="form-group">
+                      <label for="edu-description-<%= index %>">GPA/Percentage</label>
+                      <input type="text" id="edu-description-<%= index %>" class="edu-description" value="<%= edu.description %>" placeholder="e.g., 8.6 CGPA or 85%">
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-sm btn-outline remove-edu">Remove</button>
+                </div>
+              <% }) %>
+            <% } else { %>
+              <div class="education-item">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="edu-degree-0">Degree</label>
+                    <input type="text" id="edu-degree-0" class="edu-degree" required placeholder="e.g., Masters in Computer Applications">
+                  </div>
+                  <div class="form-group">
+                    <label for="edu-institution-0">Institution</label>
+                    <input type="text" id="edu-institution-0" class="edu-institution" required placeholder="e.g., Sardar Patel University">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="edu-year-0">Year</label>
+                    <input type="text" id="edu-year-0" class="edu-year" required placeholder="e.g., 2020-2022">
+                  </div>
+                  <div class="form-group">
+                    <label for="edu-description-0">GPA/Percentage</label>
+                    <input type="text" id="edu-description-0" class="edu-description" placeholder="e.g., 8.6 CGPA or 85%">
+                  </div>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline remove-edu">Remove</button>
+              </div>
+            <% } %>
+          </div>
+          <button type="button" id="addEducation" class="btn btn-sm">Add Education</button>
+        </div>
+        
+        <div class="form-section">
+          <h3>Experience</h3>
+          <p class="form-help">For the new About section design, include location in the description field (e.g., "Ahmedabad - Gujarat").</p>
+          <div id="experienceContainer">
+            <% if (profile.experience && profile.experience.length > 0) { %>
+              <% profile.experience.forEach((exp, index) => { %>
+                <div class="experience-item">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="exp-position-<%= index %>">Position</label>
+                      <input type="text" id="exp-position-<%= index %>" class="exp-position" value="<%= exp.position %>" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="exp-company-<%= index %>">Company</label>
+                      <input type="text" id="exp-company-<%= index %>" class="exp-company" value="<%= exp.company %>" required>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="exp-duration-<%= index %>">Duration</label>
+                      <input type="text" id="exp-duration-<%= index %>" class="exp-duration" value="<%= exp.duration %>" required placeholder="e.g., Jan 2022 - Present">
+                    </div>
+                    <div class="form-group">
+                      <label for="exp-description-<%= index %>">Location</label>
+                      <input type="text" id="exp-description-<%= index %>" class="exp-description" value="<%= exp.description %>" placeholder="e.g., Ahmedabad - Gujarat">
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-sm btn-outline remove-exp">Remove</button>
+                </div>
+              <% }) %>
+            <% } else { %>
+              <div class="experience-item">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="exp-position-0">Position</label>
+                    <input type="text" id="exp-position-0" class="exp-position" required placeholder="e.g., Software Engineer">
+                  </div>
+                  <div class="form-group">
+                    <label for="exp-company-0">Company</label>
+                    <input type="text" id="exp-company-0" class="exp-company" required placeholder="e.g., Radixweb">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="exp-duration-0">Duration</label>
+                    <input type="text" id="exp-duration-0" class="exp-duration" required placeholder="e.g., Jan 2022 - Present">
+                  </div>
+                  <div class="form-group">
+                    <label for="exp-description-0">Location</label>
+                    <input type="text" id="exp-description-0" class="exp-description" placeholder="e.g., Ahmedabad - Gujarat">
+                  </div>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline remove-exp">Remove</button>
+              </div>
+            <% } %>
+          </div>
+          <button type="button" id="addExperience" class="btn btn-sm">Add Experience</button>
+        </div>
+        
+        <div class="form-section">
+          <h3>Skills</h3>
+          <p class="form-help">Add your technical skills with appropriate icons. These will be displayed in the Skills section of your portfolio.</p>
+          <div id="skillsContainer">
+            <% if (profile.skills && profile.skills.length > 0) { %>
+              <% profile.skills.forEach((skill, index) => { %>
+                <div class="skill-item" data-index="<%= index %>">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="skill-name-<%= index %>">Skill Name</label>
+                      <input type="text" id="skill-name-<%= index %>" class="skill-name" value="<%= skill.name %>" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="skill-category-<%= index %>">Category</label>
+                      <select id="skill-category-<%= index %>" class="skill-category" required>
+                        <option value="FRONT-END" <%= skill.category === 'FRONT-END' ? 'selected' : '' %>>FRONT-END</option>
+                        <option value="BACK-END" <%= skill.category === 'BACK-END' ? 'selected' : '' %>>BACK-END</option>
+                        <option value="CLOUD" <%= skill.category === 'CLOUD' ? 'selected' : '' %>>CLOUD</option>
+                        <option value="OTHER" <%= skill.category === 'OTHER' ? 'selected' : '' %>>OTHER</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="skill-icon-<%= index %>">Skill Icon</label>
+                    <input type="file" id="skill-icon-<%= index %>" class="skill-icon-upload" name="skillIcon<%= index %>" accept="image/*">
+                    <input type="hidden" id="skill-icon-path-<%= index %>" class="skill-icon-path" value="<%= skill.icon %>">
+                    <p class="form-help">Upload an image for this skill (PNG or SVG recommended)</p>
+                  </div>
+                  <div class="skill-preview">
+                    <% if (skill.icon) { %>
+                      <img src="<%= skill.icon %>" alt="<%= skill.name %>" class="skill-icon-preview">
+                    <% } %>
+                  </div>
+                  <button type="button" class="btn btn-sm btn-outline remove-skill">Remove</button>
+                </div>
+              <% }) %>
+            <% } else { %>
+              <div class="skill-item" data-index="0">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="skill-name-0">Skill Name</label>
+                    <input type="text" id="skill-name-0" class="skill-name" required placeholder="e.g., HTML, CSS, JavaScript">
+                  </div>
+                  <div class="form-group">
+                    <label for="skill-category-0">Category</label>
+                    <select id="skill-category-0" class="skill-category" required>
+                      <option value="FRONT-END">FRONT-END</option>
+                      <option value="BACK-END">BACK-END</option>
+                      <option value="CLOUD">CLOUD</option>
+                      <option value="OTHER">OTHER</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="skill-icon-0">Skill Icon</label>
+                  <input type="file" id="skill-icon-0" class="skill-icon-upload" name="skillIcon0" accept="image/*">
+                  <input type="hidden" id="skill-icon-path-0" class="skill-icon-path" value="">
+                  <p class="form-help">Upload an image for this skill (PNG or SVG recommended)</p>
+                </div>
+                <div class="skill-preview"></div>
+                <button type="button" class="btn btn-sm btn-outline remove-skill">Remove</button>
+              </div>
+            <% } %>
+          </div>
+          <button type="button" id="addSkill" class="btn btn-sm">Add Skill</button>
+        </div>
+        
+        <div class="form-section">
+          <h3>Social Links</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="github">GitHub</label>
+              <input type="url" id="github" name="github" value="<%= profile.socialLinks ? profile.socialLinks.github : '' %>">
+            </div>
+            <div class="form-group">
+              <label for="linkedin">LinkedIn</label>
+              <input type="url" id="linkedin" name="linkedin" value="<%= profile.socialLinks ? profile.socialLinks.linkedin : '' %>">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="twitter">Twitter</label>
+              <input type="url" id="twitter" name="twitter" value="<%= profile.socialLinks ? profile.socialLinks.twitter : '' %>">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" value="<%= profile.socialLinks ? profile.socialLinks.email : '' %>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="whatsapp">WhatsApp Number</label>
+            <input type="text" id="whatsapp" name="whatsapp" value="<%= profile.socialLinks ? profile.socialLinks.whatsapp : '' %>" placeholder="e.g., 919876543210 (with country code, no + or spaces)">
+            <p class="form-help">Enter your WhatsApp number with country code, without + or spaces (e.g., 919876543210)</p>
+          </div>
+        </div>
+        
+        <div class="form-section">
+          <h3>Resume</h3>
+          <div class="form-group">
+            <label for="resumeUrl">Resume URL</label>
+            <input type="url" id="resumeUrl" name="resumeUrl" value="<%= profile.resumeUrl %>">
+            <p class="form-help">Enter a URL to your resume file (PDF recommended)</p>
+          </div>
+        </div>
+        
+        <input type="hidden" id="education" name="education" value="">
+        <input type="hidden" id="experience" name="experience" value="">
+        <input type="hidden" id="skills" name="skills" value="">
+        <input type="hidden" id="skillsToDelete" name="skillsToDelete" value="">
+        
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Save Profile</button>
+        </div>
+      </form>
+      
+      <div id="formMessage" class="form-message"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .form-section {
+    background-color: var(--bg-light);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .form-section h3 {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .education-item, .experience-item, .skill-item {
+    background-color: var(--bg-color);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .form-help {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+  
+  .form-actions {
+    margin-top: 30px;
+  }
+  
+  @media (max-width: 768px) {
+    .form-row {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+  }
+  
+  .skill-preview {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .skill-icon-preview {
+    max-width: 80px;
+    max-height: 80px;
+    object-fit: contain;
+    background-color: #f0f4f8;
+    padding: 10px;
+    border-radius: 8px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Education
+    const educationContainer = document.getElementById('educationContainer');
+    const addEducationBtn = document.getElementById('addEducation');
+    
+    addEducationBtn.addEventListener('click', function() {
+      const index = document.querySelectorAll('.education-item').length;
+      const educationItem = document.createElement('div');
+      educationItem.className = 'education-item';
+      educationItem.innerHTML = `
+        <div class="form-row">
+          <div class="form-group">
+            <label for="edu-degree-${index}">Degree</label>
+            <input type="text" id="edu-degree-${index}" class="edu-degree" required placeholder="e.g., Masters in Computer Applications">
+          </div>
+          <div class="form-group">
+            <label for="edu-institution-${index}">Institution</label>
+            <input type="text" id="edu-institution-${index}" class="edu-institution" required placeholder="e.g., Sardar Patel University">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="edu-year-${index}">Year</label>
+            <input type="text" id="edu-year-${index}" class="edu-year" required placeholder="e.g., 2020-2022">
+          </div>
+          <div class="form-group">
+            <label for="edu-description-${index}">GPA/Percentage</label>
+            <input type="text" id="edu-description-${index}" class="edu-description" placeholder="e.g., 8.6 CGPA or 85%">
+          </div>
+        </div>
+        <button type="button" class="btn btn-sm btn-outline remove-edu">Remove</button>
+      `;
+      
+      educationContainer.appendChild(educationItem);
+    });
+    
+    educationContainer.addEventListener('click', function(e) {
+      if (e.target.classList.contains('remove-edu')) {
+        const item = e.target.closest('.education-item');
+        if (document.querySelectorAll('.education-item').length > 1) {
+          item.remove();
+        }
+      }
+    });
+    
+    // Experience
+    const experienceContainer = document.getElementById('experienceContainer');
+    const addExperienceBtn = document.getElementById('addExperience');
+    
+    addExperienceBtn.addEventListener('click', function() {
+      const index = document.querySelectorAll('.experience-item').length;
+      const experienceItem = document.createElement('div');
+      experienceItem.className = 'experience-item';
+      experienceItem.innerHTML = `
+        <div class="form-row">
+          <div class="form-group">
+            <label for="exp-position-${index}">Position</label>
+            <input type="text" id="exp-position-${index}" class="exp-position" required placeholder="e.g., Software Engineer">
+          </div>
+          <div class="form-group">
+            <label for="exp-company-${index}">Company</label>
+            <input type="text" id="exp-company-${index}" class="exp-company" required placeholder="e.g., Radixweb">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="exp-duration-${index}">Duration</label>
+            <input type="text" id="exp-duration-${index}" class="exp-duration" required placeholder="e.g., Jan 2022 - Present">
+          </div>
+          <div class="form-group">
+            <label for="exp-description-${index}">Location</label>
+            <input type="text" id="exp-description-${index}" class="exp-description" placeholder="e.g., Ahmedabad - Gujarat">
+          </div>
+        </div>
+        <button type="button" class="btn btn-sm btn-outline remove-exp">Remove</button>
+      `;
+      
+      experienceContainer.appendChild(experienceItem);
+    });
+    
+    experienceContainer.addEventListener('click', function(e) {
+      if (e.target.classList.contains('remove-exp')) {
+        const item = e.target.closest('.experience-item');
+        if (document.querySelectorAll('.experience-item').length > 1) {
+          item.remove();
+        }
+      }
+    });
+    
+    // Skills
+    const skillsContainer = document.getElementById('skillsContainer');
+    const addSkillBtn = document.getElementById('addSkill');
+    const skillsToDelete = document.getElementById('skillsToDelete');
+    let deletedSkills = [];
+    
+    addSkillBtn.addEventListener('click', function() {
+      const index = Date.now(); // Use timestamp to ensure unique IDs
+      const skillItem = document.createElement('div');
+      skillItem.className = 'skill-item';
+      skillItem.dataset.index = index;
+      skillItem.innerHTML = `
+        <div class="form-row">
+          <div class="form-group">
+            <label for="skill-name-${index}">Skill Name</label>
+            <input type="text" id="skill-name-${index}" class="skill-name" required>
+          </div>
+          <div class="form-group">
+            <label for="skill-category-${index}">Category</label>
+            <select id="skill-category-${index}" class="skill-category" required>
+              <option value="FRONT-END">FRONT-END</option>
+              <option value="BACK-END">BACK-END</option>
+              <option value="CLOUD">CLOUD</option>
+              <option value="OTHER">OTHER</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="skill-icon-${index}">Skill Icon</label>
+          <input type="file" id="skill-icon-${index}" class="skill-icon-upload" name="skillIcon${index}" accept="image/*">
+          <input type="hidden" id="skill-icon-path-${index}" class="skill-icon-path" value="">
+          <p class="form-help">Upload an image for this skill (PNG or SVG recommended)</p>
+        </div>
+        <div class="skill-preview"></div>
+        <button type="button" class="btn btn-sm btn-outline remove-skill">Remove</button>
+      `;
+      
+      skillsContainer.appendChild(skillItem);
+      
+      // Add event listener for file preview
+      const fileInput = skillItem.querySelector('.skill-icon-upload');
+      fileInput.addEventListener('change', handleFilePreview);
+    });
+    
+    skillsContainer.addEventListener('click', function(e) {
+      if (e.target.classList.contains('remove-skill')) {
+        const item = e.target.closest('.skill-item');
+        if (document.querySelectorAll('.skill-item').length > 1) {
+          // Check if this is an existing skill with an icon path
+          const iconPath = item.querySelector('.skill-icon-path').value;
+          if (iconPath && !iconPath.startsWith('data:')) {
+            deletedSkills.push(iconPath);
+            skillsToDelete.value = JSON.stringify(deletedSkills);
+          }
+          item.remove();
+        }
+      }
+    });
+    
+    // Add event listeners for file previews to existing skill items
+    document.querySelectorAll('.skill-icon-upload').forEach(input => {
+      input.addEventListener('change', handleFilePreview);
+    });
+    
+    function handleFilePreview(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      const skillItem = e.target.closest('.skill-item');
+      const previewContainer = skillItem.querySelector('.skill-preview');
+      const reader = new FileReader();
+      
+      reader.onload = function(event) {
+        // Clear previous preview
+        previewContainer.innerHTML = '';
+        
+        // Create new preview image
+        const img = document.createElement('img');
+        img.src = event.target.result;
+        img.alt = skillItem.querySelector('.skill-name').value || 'Skill Icon';
+        img.className = 'skill-icon-preview';
+        previewContainer.appendChild(img);
+        
+        // Store the data URL in the hidden input
+        skillItem.querySelector('.skill-icon-path').value = 'data:new-upload';
+      };
+      
+      reader.readAsDataURL(file);
+    }
+    
+    // Form submission
+    const profileForm = document.getElementById('profileForm');
+    const formMessage = document.getElementById('formMessage');
+    
+    profileForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Collect education data
+      const educationItems = document.querySelectorAll('.education-item');
+      const educationData = [];
+      
+      educationItems.forEach(item => {
+        const degree = item.querySelector('.edu-degree').value;
+        const institution = item.querySelector('.edu-institution').value;
+        const year = item.querySelector('.edu-year').value;
+        const description = item.querySelector('.edu-description').value;
+        
+        if (degree && institution && year) {
+          educationData.push({
+            degree,
+            institution,
+            year,
+            description
+          });
+        }
+      });
+      
+      document.getElementById('education').value = JSON.stringify(educationData);
+      
+      // Collect experience data
+      const experienceItems = document.querySelectorAll('.experience-item');
+      const experienceData = [];
+      
+      experienceItems.forEach(item => {
+        const position = item.querySelector('.exp-position').value;
+        const company = item.querySelector('.exp-company').value;
+        const duration = item.querySelector('.exp-duration').value;
+        const description = item.querySelector('.exp-description').value;
+        
+        if (position && company && duration) {
+          experienceData.push({
+            position,
+            company,
+            duration,
+            description
+          });
+        }
+      });
+      
+      document.getElementById('experience').value = JSON.stringify(experienceData);
+      
+      // Collect skills data
+      const skillItems = document.querySelectorAll('.skill-item');
+      const skillsData = [];
+      
+      skillItems.forEach(item => {
+        const name = item.querySelector('.skill-name').value;
+        const category = item.querySelector('.skill-category').value;
+        const iconPath = item.querySelector('.skill-icon-path').value;
+        const index = item.dataset.index;
+        
+        if (name && category) {
+          skillsData.push({
+            name,
+            category,
+            icon: iconPath,
+            index: index
+          });
+        }
+      });
+      
+      document.getElementById('skills').value = JSON.stringify(skillsData);
+      
+      // Submit form
+      const formData = new FormData(profileForm);
+      const submitBtn = profileForm.querySelector('button[type="submit"]');
+      
+      submitBtn.disabled = true;
+      
+      fetch('/admin/profile', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          formMessage.innerHTML = '<div class="alert alert-success">Profile updated successfully!</div>';
+          window.scrollTo(0, 0);
+          
+          // Reload the page after a short delay to show the updated data
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        } else {
+          formMessage.innerHTML = `<div class="alert alert-error">${data.message || 'Something went wrong. Please try again.'}</div>`;
+        }
+      })
+      .catch(error => {
+        formMessage.innerHTML = '<div class="alert alert-error">Something went wrong. Please try again.</div>';
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+      });
+    });
+  });
+</script>
+
+<%- include('../partials/footer') %>

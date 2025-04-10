@@ -1,0 +1,61 @@
+<%- include('../partials/header') %>
+
+<section class="admin-dashboard">
+  <div class="container">
+    <div class="admin-header">
+      <h2>Admin Dashboard</h2>
+      <a href="/auth/logout" class="btn btn-outline">Logout</a>
+    </div>
+    
+    <div class="admin-nav">
+      <a href="/admin/dashboard" class="admin-nav-item active">Dashboard</a>
+      <a href="/admin/profile" class="admin-nav-item">Profile</a>
+      <a href="/admin/projects" class="admin-nav-item">Projects</a>
+      <a href="/admin/messages" class="admin-nav-item">Messages</a>
+    </div>
+    
+    <div class="dashboard-stats">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-project-diagram"></i>
+        </div>
+        <div class="stat-info">
+          <h3>Projects</h3>
+          <p><%= locals.projectCount || 0 %></p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <div class="stat-info">
+          <h3>Messages</h3>
+          <p><%= locals.messageCount || 0 %></p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-bell"></i>
+        </div>
+        <div class="stat-info">
+          <h3>Unread Messages</h3>
+          <p><%= locals.unreadMessageCount || 0 %></p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="dashboard-actions">
+      <div class="action-card">
+        <h3>Quick Actions</h3>
+        <div class="action-links">
+          <a href="/admin/profile" class="btn btn-sm">Update Profile</a>
+          <a href="/admin/projects/add" class="btn btn-sm">Add New Project</a>
+          <a href="/admin/messages" class="btn btn-sm">Check Messages</a>
+          <a href="/" class="btn btn-sm" target="_blank">View Portfolio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

@@ -18,7 +18,11 @@ const projectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  coverImageCloudinaryId: {
+    type: String,
+  },
   images: [String],
+  imagesCloudinaryIds: [String],
   category: {
     type: String,
     required: true,

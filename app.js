@@ -36,6 +36,11 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err))
 
+// Add this after the MongoDB connection to verify Cloudinary configuration
+if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
+  console.warn("Cloudinary environment variables are not set. Image uploads will not work correctly.")
+}
+
 // Check user on all routes - THIS IS THE ISSUE
 // app.use("*", checkUser) - This is incorrect and causing the error
 

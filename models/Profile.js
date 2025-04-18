@@ -21,6 +21,9 @@ const profileSchema = new mongoose.Schema({
     type: String,
     default: "/images/default-avatar.png",
   },
+  avatarCloudinaryId: {
+    type: String,
+  },
   education: [
     {
       degree: String,
@@ -45,6 +48,7 @@ const profileSchema = new mongoose.Schema({
         enum: ["FRONT-END", "BACK-END", "CLOUD", "OTHER"],
       },
       icon: String,
+      cloudinaryId: String,
     },
   ],
   socialLinks: {
@@ -52,7 +56,7 @@ const profileSchema = new mongoose.Schema({
     linkedin: String,
     twitter: String,
     email: String,
-    whatsapp: String, // Added WhatsApp field
+    whatsapp: String,
   },
   resumeUrl: String,
   updatedAt: {

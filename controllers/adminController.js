@@ -1,10 +1,9 @@
-import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
-import { v4 as uuidv4 } from "uuid"
 import Profile from "../models/Profile.js"
 import Project from "../models/Project.js"
 import Message from "../models/Message.js"
+import { uploadImage, deleteImage, getPublicIdFromUrl } from "../utils/cloudinary.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -136,15 +135,15 @@ export const updateProfile = async (req, res) => {
       const fileKey = `skillIcon${skill.index}`
       if (files[fileKey]) {
         const file = files[fileKey]
-        // Generate a unique filename
-        const filename = `skill_${uuidv4()}${path.extname(file.originalname)}`
-        const filePath = `/uploads/${filename}`
 
-        // Move the file to the uploads directory
-        fs.renameSync(file.path, path.join(__dirname, "../public", filePath))
+        // Upload to Cloudinary
+        const result = await uploadImage(file.path, "portfolio/skills")
 
-        // Update the skill icon path
-        skillData.icon = filePath
+        // Update the skill icon path with Cloudinary URL
+        skillData.icon = result.secure_url
+
+        // Store the public_id for future reference
+        skillData.cloudinaryId = result.public_id
       } else if (skill.icon === "data:new-upload") {
         // This means there was a file input but no actual file was selected
         // Keep the existing icon if available
@@ -152,6 +151,7 @@ export const updateProfile = async (req, res) => {
           const existingSkill = profile.skills.find((s) => s.name === skill.name)
           if (existingSkill) {
             skillData.icon = existingSkill.icon
+            skillData.cloudinaryId = existingSkill.cloudinaryId
           } else {
             skillData.icon = "/images/skills/default.png"
           }
@@ -166,12 +166,13 @@ export const updateProfile = async (req, res) => {
     // Delete skill icons that were removed
     if (skillsToDelete) {
       const deletedPaths = JSON.parse(skillsToDelete)
-      deletedPaths.forEach((iconPath) => {
-        const fullPath = path.join(__dirname, "../public", iconPath)
-        if (fs.existsSync(fullPath)) {
-          fs.unlinkSync(fullPath)
+      for (const iconPath of deletedPaths) {
+        // Check if it's a Cloudinary URL
+        const publicId = getPublicIdFromUrl(iconPath)
+        if (publicId) {
+          await deleteImage(publicId)
         }
-      })
+      }
     }
 
     const profileData = {
@@ -194,16 +195,14 @@ export const updateProfile = async (req, res) => {
     }
 
     if (files.avatar) {
-      profileData.avatar = `/uploads/${files.avatar.filename}`
+      // Upload avatar to Cloudinary
+      const result = await uploadImage(files.avatar.path, "portfolio/avatars")
+      profileData.avatar = result.secure_url
+      profileData.avatarCloudinaryId = result.public_id
 
-      // Delete old avatar if it exists and is not the default
-      if (
-        profile &&
-        profile.avatar &&
-        !profile.avatar.includes("default-avatar") &&
-        fs.existsSync(path.join(__dirname, "../public", profile.avatar))
-      ) {
-        fs.unlinkSync(path.join(__dirname, "../public", profile.avatar))
+      // Delete old avatar from Cloudinary if it exists
+      if (profile && profile.avatarCloudinaryId && !profile.avatar.includes("default-avatar")) {
+        await deleteImage(profile.avatarCloudinaryId)
       }
     }
 
@@ -261,16 +260,18 @@ export const addProject = async (req, res) => {
     // Generate a unique slug from the title
     const slug = await generateUniqueSlug(title)
 
+    // Upload cover image to Cloudinary
+    const result = await uploadImage(req.file.path, "portfolio/projects")
+
     try {
       const project = await Project.create({
         title,
-        slug, // Add the unique slug field
+        slug,
         description,
-        coverImage: `/uploads/${req.file.filename}`,
+        coverImage: result.secure_url,
+        coverImageCloudinaryId: result.public_id,
         category,
-        // If technologies is provided, use it, otherwise use an empty array
         technologies: req.body.technologies ? safeSplit(req.body.technologies) : [],
-        // Use the safe split function for techStack
         techStack: safeSplit(techStack),
         demoUrl,
         githubUrl,
@@ -279,6 +280,10 @@ export const addProject = async (req, res) => {
 
       res.status(201).json({ success: true, project })
     } catch (err) {
+      // If project creation fails, delete the uploaded image
+      if (result && result.public_id) {
+        await deleteImage(result.public_id)
+      }
       console.warn(err)
       res.status(400).json({ success: false, message: err.message })
     }
@@ -332,12 +337,10 @@ export const updateProject = async (req, res) => {
 
     const projectData = {
       title,
-      slug, // Add the unique slug field
+      slug,
       description,
       category,
-      // If technologies is provided, use it, otherwise use an empty array
       technologies: req.body.technologies ? safeSplit(req.body.technologies) : [],
-      // Use the safe split function for techStack
       techStack: safeSplit(techStack),
       demoUrl,
       githubUrl,
@@ -346,15 +349,14 @@ export const updateProject = async (req, res) => {
     }
 
     if (req.file) {
-      projectData.coverImage = `/uploads/${req.file.filename}`
+      // Upload new cover image to Cloudinary
+      const result = await uploadImage(req.file.path, "portfolio/projects")
+      projectData.coverImage = result.secure_url
+      projectData.coverImageCloudinaryId = result.public_id
 
-      // Delete old cover image
-      if (
-        currentProject &&
-        currentProject.coverImage &&
-        fs.existsSync(path.join(__dirname, "../public", currentProject.coverImage))
-      ) {
-        fs.unlinkSync(path.join(__dirname, "../public", currentProject.coverImage))
+      // Delete old cover image from Cloudinary
+      if (currentProject && currentProject.coverImageCloudinaryId) {
+        await deleteImage(currentProject.coverImageCloudinaryId)
       }
     }
 
@@ -380,18 +382,19 @@ export const deleteProject = async (req, res) => {
       return res.status(404).json({ success: false, message: "Project not found" })
     }
 
-    // Delete cover image
-    if (project.coverImage && fs.existsSync(path.join(__dirname, "../public", project.coverImage))) {
-      fs.unlinkSync(path.join(__dirname, "../public", project.coverImage))
+    // Delete cover image from Cloudinary
+    if (project.coverImageCloudinaryId) {
+      await deleteImage(project.coverImageCloudinaryId)
     }
 
-    // Delete project images
+    // Delete project images from Cloudinary
     if (project.images && project.images.length > 0) {
-      project.images.forEach((image) => {
-        if (fs.existsSync(path.join(__dirname, "../public", image))) {
-          fs.unlinkSync(path.join(__dirname, "../public", image))
+      for (const image of project.images) {
+        const publicId = getPublicIdFromUrl(image)
+        if (publicId) {
+          await deleteImage(publicId)
         }
-      })
+      }
     }
 
     await Project.findByIdAndDelete(req.params.id)

@@ -34,16 +34,28 @@ app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, "views"))
 
 // Database connection
+mongoose.set("bufferCommands", false)
+
 const connectDB = async () => {
   const uri = process.env.MONGODB_URI
-  if (uri && uri !== "memory") {
+  if (uri && uri !== "memory" && !uri.includes("127.0.0.1") && !uri.includes("localhost")) {
     try {
-      await mongoose.connect(uri, { serverSelectionTimeoutMS: 2000 })
-      console.log("Connected to MongoDB at " + uri)
+      console.log("Connecting to remote MongoDB...")
+      await mongoose.connect(uri, { serverSelectionTimeoutMS: 5000 })
+      console.log("Connected to MongoDB successfully")
       await seedResumeData()
       return
     } catch (err) {
-      console.warn(`Could not connect to external MongoDB (${err.message}). Starting In-Memory MongoDB...`)
+      console.warn(`Remote MongoDB connection failed (${err.message}). Trying in-memory fallback...`)
+    }
+  } else if (uri && (uri.includes("127.0.0.1") || uri.includes("localhost"))) {
+    try {
+      await mongoose.connect(uri, { serverSelectionTimeoutMS: 2000 })
+      console.log("Connected to local MongoDB")
+      await seedResumeData()
+      return
+    } catch (err) {
+      console.warn("Local MongoDB not available, falling back to in-memory database...")
     }
   }
 
@@ -52,22 +64,17 @@ const connectDB = async () => {
     const mongod = await MongoMemoryServer.create()
     const memoryUri = mongod.getUri()
     await mongoose.connect(memoryUri)
-    console.log("Connected to In-Memory MongoDB at " + memoryUri)
+    console.log("Connected to In-Memory MongoDB")
     await seedResumeData()
   } catch (memErr) {
-    console.error("Failed to start in-memory MongoDB:", memErr)
+    console.warn("In-memory MongoDB not started (" + memErr.message + "). Serving with resilient default content.")
   }
 }
-
-connectDB()
 
 // Add this after the MongoDB connection to verify Cloudinary configuration
 if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
   console.warn("Cloudinary environment variables are not set. Image uploads will not work correctly.")
 }
-
-// Check user on all routes - THIS IS THE ISSUE
-// app.use("*", checkUser) - This is incorrect and causing the error
 
 // FIXED: Use checkUser middleware correctly
 app.use(checkUser)
@@ -92,8 +99,9 @@ app.use((err, req, res, next) => {
 })
 
 const PORT = process.env.PORT || 3000
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT} bound to 0.0.0.0`)
+  connectDB()
 })
 
 export default app

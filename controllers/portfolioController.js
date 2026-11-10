@@ -1,3 +1,4 @@
+import mongoose from "mongoose"
 import Profile from "../models/Profile.js"
 import Project from "../models/Project.js"
 import Message from "../models/Message.js"
@@ -5,19 +6,29 @@ import Message from "../models/Message.js"
 // Home page (now includes all sections)
 export const homePage = async (req, res) => {
   try {
-    const profile = await Profile.findOne()
-    const projects = await Project.find().sort({ createdAt: -1 })
+    let profile = null
+    let projects = []
+
+    if (mongoose.connection.readyState === 1) {
+      try {
+        profile = await Profile.findOne().maxTimeMS(3000)
+        projects = await Project.find().sort({ createdAt: -1 }).maxTimeMS(3000)
+      } catch (dbErr) {
+        console.warn("DB query timed out or unavailable, serving fallback data:", dbErr.message)
+      }
+    }
 
     res.render("portfolio/home", {
-      title: profile ? `${profile.fullName} - Portfolio` : "Portfolio",
+      title: profile ? `${profile.fullName} - Portfolio` : "Prithiviraj Elumalai - Portfolio",
       profile,
       projects,
     })
   } catch (err) {
-    console.error(err)
-    res.status(500).render("error", {
-      title: "Error",
-      message: "Failed to load home page",
+    console.error("Error in homePage:", err)
+    res.render("portfolio/home", {
+      title: "Prithiviraj Elumalai - Portfolio",
+      profile: null,
+      projects: [],
     })
   }
 }
@@ -26,6 +37,10 @@ export const homePage = async (req, res) => {
 export const submitContact = async (req, res) => {
   try {
     const { name, email, subject, message } = req.body
+
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ success: false, message: "Database is connecting. Please try again in a few moments." })
+    }
 
     await Message.create({
       name,

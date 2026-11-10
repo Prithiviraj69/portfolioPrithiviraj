@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken"
+import mongoose from "mongoose"
 import User from "../models/User.js"
 
 // Middleware to check if user is authenticated
@@ -54,7 +55,7 @@ export const checkUser = async (req, res, next) => {
   // Set path for active navigation highlighting
   res.locals.path = req.originalUrl
 
-  if (token) {
+  if (token && mongoose.connection.readyState === 1) {
     try {
       const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
       const user = await User.findById(decodedToken.id)

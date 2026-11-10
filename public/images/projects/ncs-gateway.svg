@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b"/>
+      <stop offset="100%" stop-color="#022c22"/>
+    </linearGradient>
+    <linearGradient id="badgeGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#14b8a6"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgGrad2)"/>
+  <circle cx="720" cy="100" r="160" fill="#10b981" opacity="0.1"/>
+  <circle cx="80" cy="360" r="140" fill="#14b8a6" opacity="0.1"/>
+  
+  <rect x="50" y="50" width="170" height="32" rx="16" fill="url(#badgeGrad2)"/>
+  <text x="135" y="71" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">CENTRAL GATEWAY</text>
+  
+  <text x="50" y="150" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="bold" fill="#ffffff">National Career Service (NCS - MoLE)</text>
+  <text x="50" y="185" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#6ee7b7">HMAC-SHA256 SSO • Redis Cache • Data Pipeline</text>
+  
+  <g transform="translate(50, 240)">
+    <rect x="0" y="0" width="690" height="150" rx="12" fill="#064e3b" opacity="0.7" stroke="#047857" stroke-width="2"/>
+    <text x="30" y="45" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#ecfdf5">• Integration bridge linking UT employment systems to Govt of India</text>
+    <text x="30" y="80" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#ecfdf5">• Partner SSO architectures using HMAC-SHA256 payload verification</text>
+    <text x="30" y="115" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#ecfdf5">• Redis-cached faceted search slashed external API latency by 40%</text>
+  </g>
+</svg>

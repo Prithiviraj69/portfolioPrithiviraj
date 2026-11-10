@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#831843"/>
+      <stop offset="100%" stop-color="#500724"/>
+    </linearGradient>
+    <linearGradient id="badgeGrad5" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f43f5e"/>
+      <stop offset="100%" stop-color="#fb7185"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgGrad5)"/>
+  <circle cx="700" cy="100" r="150" fill="#f43f5e" opacity="0.1"/>
+  <circle cx="90" cy="350" r="150" fill="#fb7185" opacity="0.1"/>
+  
+  <rect x="50" y="50" width="160" height="32" rx="16" fill="url(#badgeGrad5)"/>
+  <text x="130" y="71" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">MOBILE BACKEND</text>
+  
+  <text x="50" y="150" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="bold" fill="#ffffff">BOCW Digital Labour Chowk</text>
+  <text x="50" y="185" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#fecdd3">Real-Time GPS • SMS OTP • Firebase Location Mapping</text>
+  
+  <g transform="translate(50, 240)">
+    <rect x="0" y="0" width="690" height="150" rx="12" fill="#500724" opacity="0.7" stroke="#9f1239" stroke-width="2"/>
+    <text x="30" y="45" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#fff1f2">• Location-based marketplace connecting daily-wage workers with contractors</text>
+    <text x="30" y="80" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#fff1f2">• High-concurrency Node.js/MongoDB backend with built-in SMS OTP</text>
+    <text x="30" y="115" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#fff1f2">• Real-time GPS location mapping &amp; dynamic push messaging</text>
+  </g>
+</svg>

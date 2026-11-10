@@ -1,60 +1,241 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Login</title>
+  <title>Admin Authentication | Prithiviraj.dev</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      background-color: var(--bg-light);
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    body.auth-body {
       min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #080b14;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      position: relative;
+      overflow-x: hidden;
+      padding: 24px;
     }
-    
-    .login-container {
-      background-color: var(--bg-color);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 30px;
+
+    .auth-card {
       width: 100%;
-      max-width: 400px;
+      max-width: 440px;
+      background: rgba(14, 21, 38, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 38px 32px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(6, 182, 212, 0.12);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      position: relative;
+      z-index: 10;
     }
-    
-    .login-header {
+
+    .auth-brand {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
     }
-    
-    .login-header h1 {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-      color: var(--primary-color);
+
+    .auth-logo-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      color: #38bdf8;
+      font-size: 1.4rem;
+      margin-bottom: 14px;
+    }
+
+    .auth-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+
+    .auth-subtitle {
+      font-size: 0.88rem;
+      color: #94a3b8;
+    }
+
+    .auth-form .form-group {
+      margin-bottom: 20px;
+    }
+
+    .auth-form label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+    }
+
+    .input-icon-wrapper {
+      position: relative;
+    }
+
+    .input-icon-wrapper i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+
+    .input-icon-wrapper input {
+      width: 100%;
+      padding: 13px 14px 13px 42px;
+      background: rgba(8, 11, 20, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .input-icon-wrapper input:focus {
+      outline: none;
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+      background: rgba(8, 11, 20, 0.9);
+    }
+
+    .btn-auth-submit {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+      border: none;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.96rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.4);
+      transition: all 0.2s ease;
+      margin-top: 26px;
+    }
+
+    .btn-auth-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(6, 182, 212, 0.5);
+    }
+
+    .btn-auth-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .auth-footer-links {
+      text-align: center;
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .back-home-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #94a3b8;
+      font-size: 0.88rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .back-home-link:hover {
+      color: #38bdf8;
+    }
+
+    .form-message {
+      margin-top: 16px;
+    }
+
+    .alert {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    .alert-error {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #f87171;
+    }
+
+    .alert-success {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
     }
   </style>
 </head>
-<body>
-  <div class="login-container">
-    <div class="login-header">
-      <h1>Admin Login</h1>
-      <p>Enter your credentials to access the admin panel</p>
+<body class="auth-body">
+  <!-- Cyber Background Elements -->
+  <div class="cyber-bg-overlay">
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="cyber-grid-mesh"></div>
+  </div>
+
+  <div class="auth-card">
+    <div class="auth-brand">
+      <div class="auth-logo-badge">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+      <h1 class="auth-title">Admin Console</h1>
+      <p class="auth-subtitle">Authenticate to manage portfolio data &amp; system parameters</p>
     </div>
     
-    <form id="loginForm" class="admin-form" action="/auth/login" method="POST" data-reset="false">
+    <form id="loginForm" class="auth-form" action="/auth/login" method="POST" data-reset="false">
       <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
+        <label for="email">Admin Email</label>
+        <div class="input-icon-wrapper">
+          <i class="fa-solid fa-envelope"></i>
+          <input type="email" id="email" name="email" placeholder="admin@domain.com" required autocomplete="username">
+        </div>
       </div>
+      
       <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
+        <label for="password">Security Password</label>
+        <div class="input-icon-wrapper">
+          <i class="fa-solid fa-lock"></i>
+          <input type="password" id="password" name="password" placeholder="••••••••••••" required autocomplete="current-password">
+        </div>
       </div>
-      <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+      
+      <button type="submit" class="btn-auth-submit">
+        <span>Sign In to Console</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
     </form>
     
     <div id="formMessage" class="form-message"></div>
+
+    <div class="auth-footer-links">
+      <a href="/" class="back-home-link">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Return to Public Portfolio</span>
+      </a>
+    </div>
   </div>
   
   <script>
@@ -72,6 +253,7 @@
         
         const submitBtn = this.querySelector('button[type="submit"]');
         submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Authenticating...';
         
         try {
           const response = await fetch('/auth/login', {
@@ -85,14 +267,17 @@
           const data = await response.json();
           
           if (response.ok) {
+            submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Authenticated!';
             window.location.href = data.redirect || '/admin/dashboard';
           } else {
-            formMessage.innerHTML = `<div class="alert alert-error">${data.error || 'Invalid email or password'}</div>`;
+            formMessage.innerHTML = `<div class="alert alert-error"><i class="fa-solid fa-triangle-exclamation"></i> ${data.error || 'Invalid credentials. Please verify your email and password.'}</div>`;
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span>Sign In to Console</span> <i class="fa-solid fa-arrow-right"></i>';
           }
         } catch (err) {
-          formMessage.innerHTML = '<div class="alert alert-error">Something went wrong. Please try again.</div>';
-        } finally {
+          formMessage.innerHTML = '<div class="alert alert-error">Connection error. Please try again.</div>';
           submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span>Sign In to Console</span> <i class="fa-solid fa-arrow-right"></i>';
         }
       });
     });

@@ -1,38 +1,151 @@
 <%- include('../partials/header') %>
 
 <!-- Hero Section -->
-<section id="home" class="hero-section">
-  <div class="home-container">
-    <div class="profile-section">
-      <div class="profile-image-container">
-        <img src="<%= locals.profile && profile.avatar ? profile.avatar : '/images/default-avatar.png' %>" alt="<%= locals.profile ? profile.fullName : 'Profile Image' %>" class="profile-image">
+<section id="home" class="hero-section modern-pro-hero">
+  <div class="container hero-container-layout">
+    <!-- Left Hero Column -->
+    <div class="hero-intro-column">
+      <div class="hero-status-pill">
+        <span class="beacon-dot"></span>
+        <span class="beacon-text">Available for full-time engineering roles</span>
       </div>
-      
-      <div class="profile-intro">
-        <h1>Hey there, I'm <span class="text-animation-container">
-          <span class="text-animation" data-text-1="<%= locals.profile ? profile.fullName : 'Your Name' %>" data-text-2="<%= locals.profile ? profile.fullName : 'Professional Developer' %>" title="Click to change style or pause animation">
-            <%= locals.profile ? profile.fullName : 'Your Name' %>
-          </span>
-        </span></h1>
+
+      <h1 class="hero-headline">
+        Engineering <span class="gradient-headline">high-scale</span> web platforms &amp; secure distributed systems.
+      </h1>
+
+      <p class="hero-description">
+        I'm <strong class="hero-name-highlight"><%= locals.profile ? profile.fullName : 'Prithiviraj Elumalai' %></strong>, a Full Stack Developer with <strong>3+ years of experience</strong> engineering mission-critical government infrastructure, hardware PKI cryptographic signing suites, and high-throughput data pipelines with <strong>70% latency reduction</strong>.
+      </p>
+
+      <!-- Key Tech Stack Pill Ribbon -->
+      <div class="hero-tech-badges">
+        <span class="tech-badge"><i class="devicon-nodejs-plain colored"></i> Node.js</span>
+        <span class="tech-badge"><i class="devicon-laravel-plain colored"></i> Laravel 12</span>
+        <span class="tech-badge"><i class="devicon-nextjs-original"></i> Next.js</span>
+        <span class="tech-badge"><i class="devicon-react-original colored"></i> React</span>
+        <span class="tech-badge"><i class="devicon-postgresql-plain colored"></i> PostgreSQL</span>
+        <span class="tech-badge"><i class="devicon-redis-plain colored"></i> Redis</span>
+        <span class="tech-badge"><i class="fa-solid fa-key" style="color: #f59e0b;"></i> PKI DSC</span>
+      </div>
+
+      <!-- Action Buttons & Socials -->
+      <div class="hero-actions-row">
+        <a href="#projects" class="btn btn-pro-primary">
+          <span>Explore Projects</span>
+          <i class="fa-solid fa-arrow-down"></i>
+        </a>
+        <a href="/docs/Prithiviraj_Elumalai_Resume.pdf" class="btn btn-pro-secondary" target="_blank" download="Prithiviraj_Elumalai_Resume.pdf">
+          <i class="fa-solid fa-file-arrow-down"></i>
+          <span>Download Resume</span>
+        </a>
         
-        <div class="bio-text">
-          <% if (locals.profile && profile.bio) { %>
-            <p><%= profile.bio %></p>
-          <% } else { %>
-            <p>I'm an experienced software developer skilled in web development. With a track record of delivering high-quality solutions, I specialize in dynamic web applications and robust server-side development.</p>
-          <% } %>
+        <div class="hero-social-cluster">
+          <a href="https://github.com/Prithiviraj69" target="_blank" rel="noopener noreferrer" class="social-circle-btn" title="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://linkedin.com/in/prithiviraj-elumalai" target="_blank" rel="noopener noreferrer" class="social-circle-btn" title="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://wa.me/919033666173" target="_blank" rel="noopener noreferrer" class="social-circle-btn" title="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+          <a href="mailto:prithvirajmudiliyar@gmail.com" class="social-circle-btn" title="Email">
+            <i class="fas fa-envelope"></i>
+          </a>
         </div>
+      </div>
+
+      <!-- Stat Counters Ribbon -->
+      <div class="hero-stats-ribbon">
+        <div class="stat-box">
+          <div class="stat-num">3+<span class="stat-plus">yrs</span></div>
+          <div class="stat-label">Full Stack Experience</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-box">
+          <div class="stat-num">70%<span class="stat-plus">cut</span></div>
+          <div class="stat-label">Latency Reduction</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-box">
+          <div class="stat-num">4<span class="stat-plus">codes</span></div>
+          <div class="stat-label">Labour Laws Digitized</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-box">
+          <div class="stat-num">PKI<span class="stat-plus">DSC</span></div>
+          <div class="stat-label">Hardware Cryptography</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Hero Visual Card -->
+    <div class="hero-visual-column">
+      <div class="pro-showcase-card">
+        <div class="card-ambient-glow"></div>
         
-        <div class="action-buttons">
-          <% if (locals.profile && profile.resumeUrl) { %>
-            <a href="<%= profile.resumeUrl %>" class="btn btn-primary" target="_blank">Resume</a>
-          <% } %>
-          
-          <% if (locals.profile && profile.socialLinks && profile.socialLinks.whatsapp) { %>
-            <a href="https://wa.me/<%= profile.socialLinks.whatsapp %>" class="btn btn-whatsapp" target="_blank">
-              <i class="fab fa-whatsapp"></i> WhatsApp
-            </a>
-          <% } %>
+        <!-- Top Profile Row -->
+        <div class="showcase-top-row">
+          <div class="showcase-avatar-box">
+            <img src="/images/user.jpg" alt="Prithiviraj Elumalai" class="showcase-avatar">
+            <span class="showcase-online-beacon" title="Active &amp; Ready"></span>
+          </div>
+          <div class="showcase-profile-details">
+            <div class="showcase-badge-wrap">
+              <span class="verified-chip"><i class="fa-solid fa-circle-check"></i> Systems Engineer</span>
+              <span class="mca-chip">MCA Graduate</span>
+            </div>
+            <h3 class="showcase-name"><%= locals.profile ? profile.fullName : 'Prithiviraj Elumalai' %></h3>
+            <p class="showcase-role">Full Stack Developer @ Prakhar Software</p>
+            <p class="showcase-location"><i class="fa-solid fa-location-dot"></i> Daman, DNH&amp;DD, India</p>
+          </div>
+        </div>
+
+        <!-- 3 Feature Highlights (Interactive mini cards) -->
+        <div class="showcase-mini-grid">
+          <div class="mini-highlight-card">
+            <div class="mini-icon icon-cyan">
+              <i class="fa-solid fa-landmark-dome"></i>
+            </div>
+            <div class="mini-info">
+              <h4>Digital Labour Compliance</h4>
+              <p>Factory licensing platform for 4 New Labour Codes</p>
+            </div>
+          </div>
+
+          <div class="mini-highlight-card">
+            <div class="mini-icon icon-emerald">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div class="mini-info">
+              <h4>National Career Service (NCS)</h4>
+              <p>Redis caching layer slashed API latency by 40%</p>
+            </div>
+          </div>
+
+          <div class="mini-highlight-card">
+            <div class="mini-icon icon-indigo">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div class="mini-info">
+              <h4>Hardware PKI DSC Suite</h4>
+              <p>Watchdata ProxKey tokens &amp; public QR verification</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Footer Quick Tech Strip -->
+        <div class="showcase-card-footer">
+          <div class="footer-chip-label">ENGINEERING STACK</div>
+          <div class="footer-pills">
+            <span>Node.js</span>
+            <span>Laravel 12</span>
+            <span>Next.js</span>
+            <span>PostgreSQL</span>
+            <span>Redis</span>
+            <span>AWS</span>
+          </div>
         </div>
       </div>
     </div>
@@ -43,67 +156,167 @@
 <section id="about" class="about-section">
   <div class="container">
     <div class="about-header">
-      <div class="about-button">ALL ABOUT ME AND MY EXPERIENCE</div>
-      <h2 class="about-title">Explore My Journey's Highlights In A Glance.</h2>
+      <div class="section-kicker">Background &amp; Philosophy</div>
+      <h2 class="about-title">Building high-reliability software with intentional architecture.</h2>
     </div>
     
     <div class="about-tabs-container">
       <div class="about-tabs">
-        <button class="about-tab-btn active" data-tab="about">About me</button>
+        <button class="about-tab-btn active" data-tab="about">Overview</button>
         <button class="about-tab-btn" data-tab="experience">Experience</button>
         <button class="about-tab-btn" data-tab="education">Education</button>
       </div>
       
       <div class="about-content-container">
+        <!-- Left Profile Card -->
         <div class="about-image-container">
-          <img src="/images/user.jpg" alt="Profile Image" class="about-image">
+          <div class="about-profile-card">
+            <div class="about-avatar-wrapper">
+              <img src="<%= locals.profile && profile.avatar ? profile.avatar : '/images/user.jpg' %>" alt="Prithiviraj Elumalai" class="about-avatar-img">
+            </div>
+            <div class="about-status-badge">
+              <span class="status-dot-pulse"></span> Available for Projects
+            </div>
+            <h3 class="about-profile-name"><%= locals.profile ? profile.fullName : 'Prithiviraj Elumalai' %></h3>
+            <p class="about-profile-role">Full Stack Developer &amp; Systems Engineer</p>
+            
+            <div class="about-quick-contact">
+              <div class="quick-contact-row">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Daman, DNH&amp;DD, India</span>
+              </div>
+              <div class="quick-contact-row">
+                <i class="fa-solid fa-envelope"></i>
+                <span>prithvirajmudiliyar@gmail.com</span>
+              </div>
+              <div class="quick-contact-row">
+                <i class="fa-solid fa-phone"></i>
+                <span>+91-9033666173</span>
+              </div>
+            </div>
+
+            <div class="about-card-actions">
+              <a href="/docs/Prithiviraj_Elumalai_Resume.pdf" class="btn btn-primary" target="_blank" download="Prithiviraj_Elumalai_Resume.pdf">
+                <i class="fa-solid fa-file-arrow-down"></i> Download Resume
+              </a>
+              <a href="https://wa.me/<%= (locals.profile && profile.socialLinks && profile.socialLinks.whatsapp) ? profile.socialLinks.whatsapp : '919033666173' %>" class="btn btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+              </a>
+            </div>
+          </div>
         </div>
         
+        <!-- Right Content Tabs -->
         <div class="about-tab-content">
           <!-- About Me Tab -->
           <div class="about-tab-pane active" id="about-tab">
-            <div class="timeline-content">
-              <% if (locals.profile && profile.aboutMe) { %>
-                <% 
-                  // Split the aboutMe text by periods to create separate sentences
-                  const sentences = profile.aboutMe.split('.').filter(sentence => sentence.trim() !== '');
-                %>
-                <% sentences.forEach(sentence => { %>
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <p><%= sentence.trim() %>.</p>
+            <div class="about-me-overview">
+              <!-- Lead Bio Card -->
+              <div class="about-bio-card">
+                <h3><%= locals.profile ? profile.fullName : 'Prithiviraj Elumalai' %></h3>
+                <p class="about-lead">
+                  Full Stack Developer with <strong>3+ years of experience</strong> engineering secure, high-traffic government portals, scalable mobile backends, and distributed web platforms. Specialized in digitizing dense government regulations, multi-tier approvals, and statutory compliance forms into intuitive, high-performance digital workflows.
+                </p>
+                <p class="about-sublead">
+                  Expertise across the complete engineering lifecycle: multi-tenant Role-Based Access Controls (RBAC), end-to-end payment integrations (SBIePay &amp; Cyber Treasury), Hardware PKI DSC Cryptographic Signing Suites (Watchdata ProxKey), and automated data pipelines with <strong>70% latency reduction</strong>.
+                </p>
+              </div>
+
+              <!-- Highlights Stat Grid -->
+              <div class="about-highlights-grid">
+                <div class="highlight-card">
+                  <div class="highlight-icon">
+                    <i class="fa-solid fa-code-branch"></i>
                   </div>
-                <% }) %>
-              <% } else { %>
-                <div class="timeline-item">
-                  <div class="timeline-dot"></div>
-                  <p>Greetings! Currently serving as a Software Engineer at Radixweb.</p>
+                  <div class="highlight-info">
+                    <h4>3+ Years</h4>
+                    <p>Full Stack &amp; Distributed Systems</p>
+                  </div>
                 </div>
-                <div class="timeline-item">
-                  <div class="timeline-dot"></div>
-                  <p>Holding a Master's degree in Computer Applications from Sardar Patel University, Gujarat (2020-2022), I've improved my skills set in various technologies, including Dotnet MVC, Blazor, and ReactJS and Angular.</p>
+
+                <div class="highlight-card">
+                  <div class="highlight-icon">
+                    <i class="fa-solid fa-building-columns"></i>
+                  </div>
+                  <div class="highlight-info">
+                    <h4>e-Governance</h4>
+                    <p>4 New Labour Codes &amp; NCS Gateway</p>
+                  </div>
                 </div>
-                <div class="timeline-item">
-                  <div class="timeline-dot"></div>
-                  <p>My expertise spans both front-end and back-end development, with a focus on crafting efficient and scalable solutions.</p>
+
+                <div class="highlight-card">
+                  <div class="highlight-icon">
+                    <i class="fa-solid fa-bolt"></i>
+                  </div>
+                  <div class="highlight-info">
+                    <h4>70% Latency Cut</h4>
+                    <p>Redis Caching &amp; Query Optimization</p>
+                  </div>
                 </div>
-                <div class="timeline-item">
-                  <div class="timeline-dot"></div>
-                  <p>I thrive on tackling challenges in API integration and optimizing performance.</p>
+
+                <div class="highlight-card">
+                  <div class="highlight-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                  </div>
+                  <div class="highlight-info">
+                    <h4>PKI &amp; FinTech</h4>
+                    <p>Hardware DSC Tokens &amp; SBIePay</p>
+                  </div>
                 </div>
-                <div class="timeline-item">
-                  <div class="timeline-dot"></div>
-                  <p>Leveraging my proficiency in version control systems like Git and TFS, I ensure smooth collaboration and streamlined code management within teams.</p>
+              </div>
+
+              <!-- Core Focus Pillars -->
+              <div class="about-pillars">
+                <div class="pillar-row">
+                  <div class="pillar-label"><i class="fa-solid fa-server"></i> Backend &amp; APIs:</div>
+                  <div class="pillar-tags">
+                    <span>Node.js</span>
+                    <span>Express.js</span>
+                    <span>Laravel 12 (PHP 8.3)</span>
+                    <span>Next.js (App Router)</span>
+                    <span>REST APIs</span>
+                  </div>
                 </div>
-                <div class="timeline-item">
-                  <div class="timeline-dot"></div>
-                  <p>Throughout my career, I've had the privilege of working on diverse projects.</p>
+
+                <div class="pillar-row">
+                  <div class="pillar-label"><i class="fa-solid fa-layer-group"></i> Frontend &amp; Web:</div>
+                  <div class="pillar-tags">
+                    <span>React.js</span>
+                    <span>Next.js</span>
+                    <span>TypeScript</span>
+                    <span>JavaScript (ES6+)</span>
+                    <span>Tailwind CSS</span>
+                    <span>Vite</span>
+                  </div>
                 </div>
-                <div class="timeline-item">
-                  <div class="timeline-dot"></div>
-                  <p>Let's connect and explore how I can bring value to your projects with my expertise and experience.</p>
+
+                <div class="pillar-row">
+                  <div class="pillar-label"><i class="fa-solid fa-database"></i> Databases &amp; Cache:</div>
+                  <div class="pillar-tags">
+                    <span>PostgreSQL (Drizzle ORM)</span>
+                    <span>MongoDB</span>
+                    <span>MySQL</span>
+                    <span>Redis Pipelines</span>
+                  </div>
                 </div>
-              <% } %>
+
+                <div class="pillar-row">
+                  <div class="pillar-label"><i class="fa-solid fa-key"></i> Security &amp; Crypto:</div>
+                  <div class="pillar-tags">
+                    <span>PKI (PKCS#7, SHA-256)</span>
+                    <span>Hardware USB DSC Tokens</span>
+                    <span>AES Encryption</span>
+                    <span>JWT &amp; RBAC</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Meta Chips -->
+              <div class="about-meta-chips">
+                <div class="meta-chip"><i class="fa-solid fa-location-dot"></i> Daman, DNH&amp;DD, India</div>
+                <div class="meta-chip"><i class="fa-solid fa-graduation-cap"></i> MCA • Veer Narmad South Gujarat University</div>
+                <div class="meta-chip"><i class="fa-solid fa-language"></i> English, Tamil, Hindi, Gujarati</div>
+              </div>
             </div>
           </div>
           
@@ -111,18 +324,24 @@
           <div class="about-tab-pane" id="experience-tab">
             <div class="timeline-content">
               <% if (locals.profile && profile.experience && profile.experience.length > 0) { %>
-                <% profile.experience.forEach((exp, index) => { %>
+                <% profile.experience.forEach(exp => { %>
                   <div class="timeline-item">
                     <div class="timeline-dot code-dot"></div>
                     <div class="timeline-info">
                       <h4><%= exp.position %></h4>
                       <h5><%= exp.company %></h5>
                       <div class="timeline-details">
-                        <span><%= exp.duration %></span>
-                        <% if (exp.description && exp.description.includes(',')) { %>
-                          <span><%= exp.description.split(',')[0] %></span>
-                        <% } %>
+                        <span><i class="fa-regular fa-calendar"></i> <%= exp.duration %></span>
                       </div>
+                      <% if (exp.description && exp.description.includes('•')) { %>
+                        <ul class="timeline-bullets">
+                          <% exp.description.split('•').filter(b => b.trim()).forEach(bullet => { %>
+                            <li><%= bullet.trim() %></li>
+                          <% }) %>
+                        </ul>
+                      <% } else if (exp.description) { %>
+                        <p class="timeline-desc"><%= exp.description %></p>
+                      <% } %>
                     </div>
                   </div>
                 <% }) %>
@@ -130,34 +349,17 @@
                 <div class="timeline-item">
                   <div class="timeline-dot code-dot"></div>
                   <div class="timeline-info">
-                    <h4>Software Engineer</h4>
-                    <h5>Radixweb</h5>
+                    <h4>Full Stack Developer</h4>
+                    <h5>Prakhar Software Solutions Pvt. Ltd.</h5>
                     <div class="timeline-details">
-                      <span>Jan 2025 - Present</span>
-                      <span>Ahmedabad - Gujarat</span>
+                      <span><i class="fa-regular fa-calendar"></i> Mar 2023 – Present</span>
+                      <span><i class="fa-solid fa-location-dot"></i> Daman, DNH&amp;DD</span>
                     </div>
-                  </div>
-                </div>
-                <div class="timeline-item">
-                  <div class="timeline-dot code-dot"></div>
-                  <div class="timeline-info">
-                    <h4>Software Developer</h4>
-                    <h5>Binary Republik</h5>
-                    <div class="timeline-details">
-                      <span>June 2024 - Dec 2024</span>
-                      <span>Ahmedabad - Gujarat</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="timeline-item">
-                  <div class="timeline-dot code-dot"></div>
-                  <div class="timeline-info">
-                    <h4>Jr. Software Developer</h4>
-                    <h5>Bigscal Technologies Pvt. Ltd.</h5>
-                    <div class="timeline-details">
-                      <span>Dec 2021 - May 2024</span>
-                      <span>Surat - Gujarat</span>
-                    </div>
+                    <ul class="timeline-bullets">
+                      <li><strong>Digital Labour Compliance Portal:</strong> Re-engineered dense manual paperwork into interactive multi-step online forms under the 4 New Labour Codes for effortless licensing and regulatory renewals.</li>
+                      <li><strong>FinTech &amp; Treasury Integration:</strong> Integrated SBIePay Payment Gateway &amp; Cyber Treasury module to automate statutory fee calculations with real-time transaction reconciliation.</li>
+                      <li><strong>Hardware PKI DSC Signing Suite:</strong> Implemented cryptographic signing supporting USB tokens (Watchdata ProxKey) to apply PKCS#7 signatures onto certificates with secure public QR verification.</li>
+                    </ul>
                   </div>
                 </div>
               <% } %>
@@ -168,15 +370,18 @@
           <div class="about-tab-pane" id="education-tab">
             <div class="timeline-content">
               <% if (locals.profile && profile.education && profile.education.length > 0) { %>
-                <% profile.education.forEach((edu, index) => { %>
+                <% profile.education.forEach(edu => { %>
                   <div class="timeline-item">
                     <div class="timeline-dot edu-dot"></div>
                     <div class="timeline-info">
                       <h4><%= edu.degree %></h4>
-                      <h5><%= edu.institution %> <% if (edu.description && edu.description.includes('GPA')) { %><%= edu.description %><% } %></h5>
+                      <h5><%= edu.institution %></h5>
                       <div class="timeline-details">
-                        <span><%= edu.year %></span>
+                        <span><i class="fa-regular fa-calendar"></i> <%= edu.year %></span>
                       </div>
+                      <% if (edu.description) { %>
+                        <p class="timeline-desc"><%= edu.description %></p>
+                      <% } %>
                     </div>
                   </div>
                 <% }) %>
@@ -184,44 +389,30 @@
                 <div class="timeline-item">
                   <div class="timeline-dot edu-dot"></div>
                   <div class="timeline-info">
-                    <h4>Masters in Computer Applications</h4>
-                    <h5>Sardar Patel University (8.6 CGPA)</h5>
+                    <h4>Master of Computer Applications (MCA)</h4>
+                    <h5>Veer Narmad South Gujarat University</h5>
                     <div class="timeline-details">
-                      <span>2020-2022</span>
+                      <span><i class="fa-regular fa-calendar"></i> 2020 – 2022</span>
+                      <span><i class="fa-solid fa-location-dot"></i> Surat, Gujarat</span>
                     </div>
-                  </div>
-                </div>
-                <div class="timeline-item">
-                  <div class="timeline-dot edu-dot"></div>
-                  <div class="timeline-info">
-                    <h4>Bachelor's in Computer Applications</h4>
-                    <h5>Veer Narmad South Gujrat University (7.9 CGPA)</h5>
-                    <div class="timeline-details">
-                      <span>2017-2020</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="timeline-item">
-                  <div class="timeline-dot edu-dot"></div>
-                  <div class="timeline-info">
-                    <h4>H.S.C</h4>
-                    <h5>Saraswati Hindi Vidhyalay (83%)</h5>
-                    <div class="timeline-details">
-                      <span>2016-2017</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="timeline-item">
-                  <div class="timeline-dot edu-dot"></div>
-                  <div class="timeline-info">
-                    <h4>S.S.C</h4>
-                    <h5>Saraswati Hindi Vidhyalay (76.5%)</h5>
-                    <div class="timeline-details">
-                      <span>2014-2015</span>
-                    </div>
+                    <p class="timeline-desc">Post-graduate degree focusing on Advanced Computing, Software Engineering, Distributed Systems, Database Architectures, and Full Stack Web Application Development.</p>
                   </div>
                 </div>
               <% } %>
+
+              <div class="timeline-item">
+                <div class="timeline-dot edu-dot"></div>
+                <div class="timeline-info">
+                  <h4>Languages &amp; Communication</h4>
+                  <h5>Multilingual Fluency</h5>
+                  <div class="language-chips">
+                    <span class="lang-chip"><strong>English</strong> (Professional)</span>
+                    <span class="lang-chip"><strong>Tamil</strong> (Native)</span>
+                    <span class="lang-chip"><strong>Hindi</strong> (Conversational)</span>
+                    <span class="lang-chip"><strong>Gujarati</strong> (Conversational)</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -230,18 +421,17 @@
   </div>
 </section>
 
-
 <!-- Projects Section -->
-<section id="projects" class="projects-section">
+<section id="projects" class="projects-section high-tech-section">
   <div class="container">
-    <div class="projects-header">
-      <div class="projects-button">MY PROJECTS</div><br>
-      <h2 class="projects-title">Discover My Creative Projects</h2>
-      <p class="projects-subtitle">Discover my passion for innovation through meticulously crafted projects, where creativity meets attention to detail.</p>
+    <div class="section-header-tech">
+      <div class="section-kicker">Portfolio &amp; Case Studies</div>
+      <h2 class="tech-section-title">Systems Engineered for Scale &amp; Compliance</h2>
+      <p class="tech-section-subtitle">Mission-critical e-Governance platforms, cryptographic workflows, and optimized distributed architectures built for real-world impact.</p>
     </div>
     
-    <div class="projects-filter">
-      <button class="project-filter-btn active" data-filter="all">ALL</button>
+    <div class="projects-filter tech-filter-bar">
+      <button class="project-filter-btn active" data-filter="all">All Projects</button>
       <% 
         // Extract unique categories from projects
         let categories = [];
@@ -254,79 +444,85 @@
           <button class="project-filter-btn" data-filter="<%= category.toLowerCase().replace(/\s+/g, '-') %>"><%= category %></button>
         <% }) %>
       <% } else { %>
-        <button class="project-filter-btn" data-filter="dotnet-core">DOTNET CORE</button>
-        <button class="project-filter-btn" data-filter="dotnet-mvc">DOTNET MVC</button>
-        <button class="project-filter-btn" data-filter="blazor">BLAZOR</button>
-        <button class="project-filter-btn" data-filter="react">REACT</button>
+        <button class="project-filter-btn" data-filter="government">Government</button>
+        <button class="project-filter-btn" data-filter="web-portal">Web Portals</button>
+        <button class="project-filter-btn" data-filter="enterprise">Enterprise</button>
+        <button class="project-filter-btn" data-filter="next-js-ai">Next.js &amp; AI</button>
+        <button class="project-filter-btn" data-filter="mobile-backend">Mobile Backend</button>
       <% } %>
     </div>
     
-    <div class="projects-grid">
+    <div class="projects-grid tech-projects-grid">
       <% if (locals.projects && projects.length > 0) { %>
-        <% projects.forEach(project => { %>
-          <div class="project-card" data-category="<%= project.category.toLowerCase().replace(/\s+/g, '-') %>">
+        <% projects.forEach((project, idx) => { %>
+          <div class="project-card tech-project-card" data-category="<%= project.category.toLowerCase().replace(/\s+/g, '-') %>">
+            <div class="project-card-header-bar">
+              <span class="card-sys-id">Production</span>
+              <span class="card-cat-badge"><%= project.category %></span>
+            </div>
             <div class="project-image">
               <img src="<%= project.coverImage %>" alt="<%= project.title %>">
+              <div class="project-image-overlay">
+                <span class="view-overlay-btn"><i class="fa-solid fa-expand"></i></span>
+              </div>
             </div>
             <div class="project-info">
               <h3 class="project-title">
                 <% if (project.demoUrl) { %>
-                  <a href="<%= project.demoUrl %>" target="_blank"><%= project.title %></a>
+                  <a href="<%= project.demoUrl %>" target="_blank" rel="noopener noreferrer"><%= project.title %> <i class="fa-solid fa-arrow-up-right-from-square title-ext-icon"></i></a>
                 <% } else { %>
-                  <%= project.title %>
+                  <a href="/projects/<%= project.slug %>"><%= project.title %></a>
                 <% } %>
               </h3>
               <p class="project-description"><%= project.description %></p>
-              <div class="project-tech">
-                <p class="tech-label">TechStack :</p>
-                <p class="tech-list"><%= project.techStack.join(', ') %></p>
+              
+              <div class="project-tech-pills">
+                <% project.techStack.forEach(t => { %>
+                  <span class="tech-pill"><%= t %></span>
+                <% }) %>
+              </div>
+
+              <div class="project-card-footer">
+                <% if (project.demoUrl) { %>
+                  <a href="<%= project.demoUrl %>" target="_blank" rel="noopener noreferrer" class="btn btn-card-primary">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Portal
+                  </a>
+                <% } %>
+                <% if (project.githubUrl) { %>
+                  <a href="<%= project.githubUrl %>" target="_blank" rel="noopener noreferrer" class="btn btn-card-outline">
+                    <i class="fab fa-github"></i> Source Code
+                  </a>
+                <% } %>
+                <a href="/projects/<%= project.slug %>" class="btn btn-card-link">
+                  Case Study <i class="fa-solid fa-chevron-right"></i>
+                </a>
               </div>
             </div>
           </div>
         <% }) %>
       <% } else { %>
-        <div class="project-card" data-category="dotnet-core">
+        <!-- Fallback Cards -->
+        <div class="project-card tech-project-card" data-category="government">
+          <div class="project-card-header-bar">
+            <span class="card-sys-id">Production</span>
+            <span class="card-cat-badge">Government</span>
+          </div>
           <div class="project-image">
-            <img src="/images/project1.jpg" alt="Priority Couriers">
+            <img src="/images/projects/labour-compliance.svg" alt="Digital Labour Compliance Portal">
           </div>
           <div class="project-info">
-            <h3 class="project-title">
-              <a href="#" target="_blank">Priority Couriers</a>
-            </h3>
-            <p class="project-description">Developed RESTful APIs in .NET Core for Amazon Selling Partner integration. Designed and optimized database structures for improved performance. Implemented table structure based on Amazon schema models.</p>
-            <div class="project-tech">
-              <p class="tech-label">TechStack :</p>
-              <p class="tech-list">.NET Core, SQL Server, Stripe, EF Core, REST API, Azure Devops, xUnit Testing, Cloudflare, OData, OAuth</p>
+            <h3 class="project-title">Digital Labour Compliance &amp; Regulatory Portal</h3>
+            <p class="project-description">Enterprise e-Governance website built to simplify and digitize all factory registrations, licensing, and compliance matrices under the 4 New Labour Codes. Integrated SBIePay Payment Gateway, Cyber Treasury module, and Hardware PKI DSC Signing Suite (Watchdata ProxKey) with secure QR verification.</p>
+            <div class="project-tech-pills">
+              <span class="tech-pill">Node.js</span>
+              <span class="tech-pill">Express.js</span>
+              <span class="tech-pill">MongoDB</span>
+              <span class="tech-pill">PKI Cryptography</span>
+              <span class="tech-pill">SBIePay</span>
+              <span class="tech-pill">Redis</span>
             </div>
-          </div>
-        </div>
-        <div class="project-card" data-category="dotnet-core">
-          <div class="project-image">
-            <img src="/images/project2.jpg" alt="Dice Fanatics">
-          </div>
-          <div class="project-info">
-            <h3 class="project-title">
-              <a href="#" target="_blank">Dice Fanatics</a>
-            </h3>
-            <p class="project-description">Developed an online marketplace for dice enthusiasts to buy, sell, and trade dice collections. It allows users to showcase their collections, connect with other dice fans, and search for specific dice sets. The platform facilitates secure transactions and includes features like friend requests and ISO (In Search Of) listings to help users find the dice they desire. Conducted xUnit testing, and provided debugging support.</p>
-            <div class="project-tech">
-              <p class="tech-label">TechStack :</p>
-              <p class="tech-list">.NET Core, SQL Server, Stripe, EF Core, REST API, Azure Devops, xUnit Testing, Cloudflare, OData, OAuth</p>
-            </div>
-          </div>
-        </div>
-        <div class="project-card" data-category="blazor">
-          <div class="project-image">
-            <img src="/images/project3.jpg" alt="ErpCrebit">
-          </div>
-          <div class="project-info">
-            <h3 class="project-title">
-              <a href="#" target="_blank">ErpCrebit</a>
-            </h3>
-            <p class="project-description">ErpCrebit is an industry-wide computer software system used to manage and coordinate all the clients resources, information and functions of business from shared data stores. It includes payroll, free customization, Project Management, multi-process billing, licensing and cloud based enterprise resource planning for all business.</p>
-            <div class="project-tech">
-              <p class="tech-label">TechStack :</p>
-              <p class="tech-list">Blazor & .Net Core 6, SQL Server, REST API, TFS, Asp.Net MVC, HTML, CSS, Javascript, jQuery, Ajax</p>
+            <div class="project-card-footer">
+              <a href="/projects/digital-labour-compliance-portal" class="btn btn-card-link">Case Study <i class="fa-solid fa-chevron-right"></i></a>
             </div>
           </div>
         </div>
@@ -335,16 +531,17 @@
   </div>
 </section>
 
-
 <!-- Skills Section -->
-<section id="skills" class="skills-section">
+<section id="skills" class="skills-section high-tech-section">
   <div class="container">
-    <div class="skills-header">
-      <h2 class="skills-title">My Technical Skills</h2>
+    <div class="section-header-tech">
+      <div class="section-kicker">Technical Proficiencies</div>
+      <h2 class="tech-section-title">Core Systems &amp; Technologies</h2>
+      <p class="tech-section-subtitle">Deep expertise across modern full-stack architectures, high-performance database caching, cryptographic security, and cloud infrastructure.</p>
     </div>
     
-    <div class="skills-filter">
-      <button class="skill-filter-btn active" data-filter="all">ALL</button>
+    <div class="skills-filter tech-filter-bar">
+      <button class="skill-filter-btn active" data-filter="all">All Skills</button>
       <% 
         // Extract unique skill categories
         let skillCategories = [];
@@ -357,133 +554,141 @@
           <button class="skill-filter-btn" data-filter="<%= category.toLowerCase().replace(/[^\w]+/g, '-') %>"><%= category %></button>
         <% }) %>
       <% } else { %>
-        <button class="skill-filter-btn" data-filter="front-end">FRONT-END</button>
-        <button class="skill-filter-btn" data-filter="back-end">BACK-END</button>
-        <button class="skill-filter-btn" data-filter="cloud">CLOUD</button>
+        <button class="skill-filter-btn" data-filter="back-end">Backend</button>
+        <button class="skill-filter-btn" data-filter="front-end">Frontend</button>
+        <button class="skill-filter-btn" data-filter="database">Databases</button>
+        <button class="skill-filter-btn" data-filter="security">Security &amp; PKI</button>
+        <button class="skill-filter-btn" data-filter="cloud">Cloud &amp; DevOps</button>
       <% } %>
     </div>
     
-    <div class="skills-grid">
+    <div class="skills-grid tech-skills-grid">
       <% if (locals.profile && profile.skills && profile.skills.length > 0) { %>
         <% profile.skills.forEach(skill => { %>
-          <div class="skill-card" data-category="<%= skill.category.toLowerCase().replace(/[^\w]+/g, '-') %>">
+          <div class="skill-card tech-skill-card" data-category="<%= skill.category.toLowerCase().replace(/[^\w]+/g, '-') %>">
+            <div class="skill-header-meta">
+              <span class="skill-cat-tag"><%= skill.category %></span>
+              <span class="skill-status-dot"></span>
+            </div>
             <div class="skill-icon">
-              <img src="<%= skill.icon %>" alt="<%= skill.name %>">
+              <% if (skill.icon && skill.icon.startsWith('<')) { %>
+                <%- skill.icon %>
+              <% } else if (skill.icon) { %>
+                <img src="<%= skill.icon %>" alt="<%= skill.name %>">
+              <% } else { %>
+                <i class="fa-solid fa-code"></i>
+              <% } %>
             </div>
             <div class="skill-name"><%= skill.name %></div>
           </div>
         <% }) %>
       <% } else { %>
-        <!-- Frontend Skills -->
-        <div class="skill-card" data-category="front-end">
-          <div class="skill-icon">
-            <img src="/images/skills/html.png" alt="HTML">
-          </div>
-          <div class="skill-name">HTML</div>
-        </div>
-        <div class="skill-card" data-category="front-end">
-          <div class="skill-icon">
-            <img src="/images/skills/css.png" alt="CSS">
-          </div>
-          <div class="skill-name">CSS</div>
-        </div>
-        <div class="skill-card" data-category="front-end">
-          <div class="skill-icon">
-            <img src="/images/skills/javascript.png" alt="JavaScript">
-          </div>
-          <div class="skill-name">JavaScript</div>
-        </div>
-        <div class="skill-card" data-category="front-end">
-          <div class="skill-icon">
-            <img src="/images/skills/react.png" alt="React">
-          </div>
-          <div class="skill-name">React</div>
-        </div>
-        <div class="skill-card" data-category="front-end">
-          <div class="skill-icon">
-            <img src="/images/skills/jquery.png" alt="jQuery">
-          </div>
-          <div class="skill-name">jQuery</div>
-        </div>
-        
-        <!-- Backend Skills -->
-        <div class="skill-card" data-category="back-end">
-          <div class="skill-icon">
-            <img src="/images/skills/dotnet-core.png" alt=".NET Core">
-          </div>
-          <div class="skill-name">.NET Core</div>
-        </div>
-        <div class="skill-card" data-category="back-end">
-          <div class="skill-icon">
-            <img src="/images/skills/csharp.png" alt="C#">
-          </div>
-          <div class="skill-name">C#</div>
-        </div>
-        <div class="skill-card" data-category="back-end">
-          <div class="skill-icon">
-            <img src="/images/skills/sql-server.png" alt="SQL Server">
-          </div>
-          <div class="skill-name">SQL Server</div>
-        </div>
-        <div class="skill-card" data-category="back-end">
-          <div class="skill-icon">
-            <img src="/images/skills/ef-core.png" alt="EF Core">
-          </div>
-          <div class="skill-name">EF Core</div>
-        </div>
-        
-        <!-- Cloud Skills -->
-        <div class="skill-card" data-category="cloud">
-          <div class="skill-icon">
-            <img src="/images/skills/git.png" alt="GIT">
-          </div>
-          <div class="skill-name">GIT</div>
-        </div>
-        <div class="skill-card" data-category="cloud">
-          <div class="skill-icon">
-            <img src="/images/skills/tfs.png" alt="TFS">
-          </div>
-          <div class="skill-name">TFS</div>
+        <!-- Default Skill Cards -->
+        <div class="skill-card tech-skill-card" data-category="back-end">
+          <div class="skill-icon"><i class="devicon-nodejs-plain colored"></i></div>
+          <div class="skill-name">Node.js</div>
         </div>
       <% } %>
     </div>
   </div>
 </section>
 
-
 <!-- Contact Section -->
-<section id="contact" class="contact-section">
+<section id="contact" class="contact-section high-tech-section">
   <div class="container">
-    <div class="section-header">
-      <h2>GET IN TOUCH</h2><br>
-      <h3>Contact Me</h3>
-      <p>If you wish to reach out to me please feel free to leave your mail here</p>
+    <div class="section-header-tech">
+      <div class="section-kicker">Direct Contact</div>
+      <h2 class="tech-section-title">Let's Discuss Architecture &amp; Opportunities</h2>
+      <p class="tech-section-subtitle">Reach out for architecture consulting, high-concurrency platform engineering, or senior full-stack opportunities.</p>
     </div>
-    <div class="contact-content">
-      <div class="contact-image">
-        <img src="/images/contact.svg" alt="Contact">
+    
+    <div class="contact-tech-layout">
+      <!-- Left: Direct Channels -->
+      <div class="contact-telemetry-col">
+        <div class="telemetry-box">
+          <div class="telemetry-box-header">
+            <div class="telemetry-indicator"><span class="telemetry-pulse"></span> Direct Communication Channels</div>
+          </div>
+
+          <!-- Channel 1: Email -->
+          <div class="channel-card">
+            <div class="channel-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div class="channel-info">
+              <span class="channel-lbl">Direct Email</span>
+              <span class="channel-val">prithvirajmudiliyar@gmail.com</span>
+            </div>
+            <button class="copy-channel-btn" data-copy="prithvirajmudiliyar@gmail.com" title="Copy Email">
+              <i class="fa-regular fa-copy"></i>
+            </button>
+          </div>
+
+          <!-- Channel 2: WhatsApp -->
+          <div class="channel-card">
+            <div class="channel-icon c-green"><i class="fab fa-whatsapp"></i></div>
+            <div class="channel-info">
+              <span class="channel-lbl">Phone &amp; WhatsApp</span>
+              <span class="channel-val">+91-9033666173</span>
+            </div>
+            <a href="https://wa.me/919033666173" target="_blank" rel="noopener noreferrer" class="link-channel-btn" title="Open WhatsApp">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+
+          <!-- Channel 3: Location -->
+          <div class="channel-card">
+            <div class="channel-icon c-cyan"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="channel-info">
+              <span class="channel-lbl">Location</span>
+              <span class="channel-val">Daman, DNH&amp;DD, India</span>
+            </div>
+          </div>
+
+          <!-- Social Matrix -->
+          <div class="telemetry-social-matrix">
+            <a href="https://github.com/Prithiviraj69" target="_blank" rel="noopener noreferrer" class="social-tech-pill">
+              <i class="fab fa-github"></i> <span>GitHub</span>
+            </a>
+            <a href="https://linkedin.com/in/prithiviraj-elumalai" target="_blank" rel="noopener noreferrer" class="social-tech-pill">
+              <i class="fab fa-linkedin"></i> <span>LinkedIn</span>
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="contact-form">
-        <form id="contactForm">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="John Doe" required>
+
+      <!-- Right: Contact Form -->
+      <div class="contact-form-col">
+        <div class="tech-form-card">
+          <div class="form-terminal-top">
+            <span class="ftt-prompt">Send a Direct Message</span>
           </div>
-          <div class="form-group">
-            <label for="email">Email <span class="required">*</span></label>
-            <input type="email" id="email" name="email" placeholder="your@email.com" required>
-          </div>
-          <div class="form-group">
-            <label for="subject">Subject</label>
-            <input type="text" id="subject" name="subject" placeholder="Your subject">
-          </div>
-          <div class="form-group">
-            <label for="message">Your message <span class="required">*</span></label>
-            <textarea id="message" name="message" placeholder="Drop your message here" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Send email</button>
-        </form>
-        <div id="formMessage" class="form-message"></div>
+          <form id="contactForm" class="cyber-form">
+            <div class="form-row-2">
+              <div class="form-group-tech">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="John Doe" required>
+              </div>
+              <div class="form-group-tech">
+                <label for="email">Work Email</label>
+                <input type="email" id="email" name="email" placeholder="name@company.com" required>
+              </div>
+            </div>
+
+            <div class="form-group-tech">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="Project Opportunity / Technical Consulting">
+            </div>
+
+            <div class="form-group-tech">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Tell me about your project, timeline, or scope..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-pro-primary" style="width: 100%; justify-content: center;">
+              <i class="fa-solid fa-paper-plane"></i> Send Message
+            </button>
+          </form>
+          <div id="formMessage" class="form-message"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -497,16 +702,72 @@
     
     aboutTabBtns.forEach(btn => {
       btn.addEventListener('click', function() {
-        // Remove active class from all buttons and panes
         aboutTabBtns.forEach(b => b.classList.remove('active'));
         aboutTabPanes.forEach(p => p.classList.remove('active'));
         
-        // Add active class to clicked button
         this.classList.add('active');
-        
-        // Get the tab id and show the corresponding pane
         const tabId = this.getAttribute('data-tab');
-        document.getElementById(`${tabId}-tab`).classList.add('active');
+        const pane = document.getElementById(`${tabId}-tab`);
+        if (pane) {
+          pane.classList.add('active');
+        }
+      });
+    });
+
+    // Copy to clipboard
+    const copyBtns = document.querySelectorAll('.copy-channel-btn');
+    copyBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const textToCopy = this.getAttribute('data-copy');
+        if (textToCopy) {
+          navigator.clipboard.writeText(textToCopy).then(() => {
+            const originalIcon = this.innerHTML;
+            this.innerHTML = '<i class="fa-solid fa-check" style="color: #10b981;"></i>';
+            setTimeout(() => {
+              this.innerHTML = originalIcon;
+            }, 2000);
+          });
+        }
+      });
+    });
+
+    // Projects filtering
+    const projectFilterBtns = document.querySelectorAll('.project-filter-btn');
+    const projectCards = document.querySelectorAll('.tech-project-card');
+
+    projectFilterBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        projectFilterBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+
+        const filter = this.getAttribute('data-filter');
+        projectCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Skills filtering
+    const skillFilterBtns = document.querySelectorAll('.skill-filter-btn');
+    const skillCards = document.querySelectorAll('.tech-skill-card');
+
+    skillFilterBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        skillFilterBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+
+        const filter = this.getAttribute('data-filter');
+        skillCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
       });
     });
     
@@ -537,7 +798,7 @@
           const data = await response.json();
           
           if (data.success) {
-            formMessage.innerHTML = '<div class="alert alert-success">Message sent successfully! I will get back to you soon.</div>';
+            formMessage.innerHTML = '<div class="alert alert-success">Message sent successfully! I will get back to you shortly.</div>';
             contactForm.reset();
           } else {
             formMessage.innerHTML = `<div class="alert alert-error">${data.message || 'Something went wrong. Please try again.'}</div>`;

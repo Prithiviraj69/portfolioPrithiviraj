@@ -1,30 +1,21 @@
 </main>
-<footer class="footer">
+<footer class="footer high-tech-footer">
   <div class="container">
+    <div class="footer-top-telemetry">
+      <div class="footer-tech-tags">
+        <span>Node.js</span> • <span>Laravel 12</span> • <span>Next.js</span> • <span>PostgreSQL</span> • <span>Redis</span> • <span>PKI DSC</span>
+      </div>
+    </div>
+
     <div class="footer-content">
       <div class="copyright">
-        <p>Designed and built by <%= locals.profile ? profile.fullName : 'Your Name' %> © <%= new Date().getFullYear() %>. All rights reserved.</p>
+        <p>Architected &amp; Engineered by <strong><%= locals.profile ? profile.fullName : 'Prithiviraj Elumalai' %></strong> © <%= new Date().getFullYear() %>. Built with Node.js, Express &amp; High-Performance Systems.</p>
       </div>
-      <div class="social-links">
-        <% if (locals.profile && profile.socialLinks) { %>
-          <% if (profile.socialLinks.github) { %>
-            <a href="<%= profile.socialLinks.github %>" target="_blank"><i class="fab fa-github"></i></a>
-          <% } %>
-          <% if (profile.socialLinks.linkedin) { %>
-            <a href="<%= profile.socialLinks.linkedin %>" target="_blank"><i class="fab fa-linkedin"></i></a>
-          <% } %>
-          <% if (profile.socialLinks.twitter) { %>
-            <a href="<%= profile.socialLinks.twitter %>" target="_blank"><i class="fab fa-twitter"></i></a>
-          <% } %>
-          <% if (profile.socialLinks.email) { %>
-            <a href="mailto:<%= profile.socialLinks.email %>"><i class="fas fa-envelope"></i></a>
-          <% } %>
-        <% } else { %>
-          <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-          <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-          <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fas fa-envelope"></i></a>
-        <% } %>
+      <div class="social-links footer-tech-socials">
+        <a href="https://github.com/Prithiviraj69" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/prithiviraj-elumalai" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://wa.me/919033666173" target="_blank" rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="mailto:prithvirajmudiliyar@gmail.com" title="Direct Email"><i class="fas fa-envelope"></i></a>
       </div>
     </div>
   </div>

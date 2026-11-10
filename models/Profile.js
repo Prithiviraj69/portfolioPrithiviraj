@@ -45,7 +45,7 @@ const profileSchema = new mongoose.Schema({
       name: String,
       category: {
         type: String,
-        enum: ["FRONT-END", "BACK-END", "CLOUD", "OTHER"],
+        enum: ["FRONT-END", "BACK-END", "DATABASE", "SECURITY", "CLOUD", "OTHER"],
       },
       icon: String,
       cloudinaryId: String,

@@ -1,19 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 </head>
-<body>
+<body class="high-tech-body">
+  <!-- Cyber Ambient Background -->
+  <div class="cyber-bg-overlay">
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+    <div class="cyber-grid-mesh"></div>
+  </div>
+
   <header class="header">
     <div class="container">
       <div class="header-content">
         <div class="logo">
-          <a href="/">Prithiviraj Portfolio</a>
+          <a href="/" class="tech-logo">
+            <span class="tech-logo-name">Prithiviraj</span>
+            <span class="tech-logo-dot">.</span>
+            <span class="tech-logo-role">dev</span>
+          </a>
         </div>
+
         <nav class="nav">
           <ul class="nav-list">
             <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
@@ -22,11 +39,14 @@
             <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
             <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
             <% if (locals.user && locals.user.role === 'admin') { %>
-              <li><a href="/admin/dashboard" class="admin-link">Admin</a></li>
+              <li><a href="/admin/dashboard" class="admin-link"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+              <li><a href="/auth/logout" class="admin-link" title="Logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
+            <% } else { %>
+              <li><a href="/auth/login" class="nav-admin-btn" title="Admin Login"><i class="fa-solid fa-lock"></i></a></li>
             <% } %>
             <li>
               <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon"></i>
               </button>
             </li>
           </ul>
@@ -47,7 +67,10 @@
       <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
       <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
       <% if (locals.user && locals.user.role === 'admin') { %>
-        <li><a href="/admin/dashboard" class="admin-link">Admin</a></li>
+        <li><a href="/admin/dashboard" class="admin-link">Dashboard</a></li>
+        <li><a href="/auth/logout" class="admin-link">Logout</a></li>
+      <% } else { %>
+        <li><a href="/auth/login" class="nav-admin-btn">Admin Login</a></li>
       <% } %>
       <li>
         <button id="mobile-theme-toggle" class="theme-toggle" aria-label="Toggle theme">

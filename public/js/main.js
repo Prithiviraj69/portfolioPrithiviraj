@@ -218,6 +218,65 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 })
 
+// Terminal Tab Switcher
+document.addEventListener("DOMContentLoaded", () => {
+  const termTabBtns = document.querySelectorAll(".term-tab-btn")
+  const termPanes = document.querySelectorAll(".term-pane")
+
+  if (termTabBtns.length > 0) {
+    termTabBtns.forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const target = this.getAttribute("data-term")
+        termTabBtns.forEach((b) => b.classList.remove("active"))
+        termPanes.forEach((p) => p.classList.remove("active"))
+        this.classList.add("active")
+        const activePane = document.getElementById(`term-${target}`)
+        if (activePane) activePane.classList.add("active")
+      })
+    })
+  }
+
+  // Copy channel button with toast feedback
+  const copyBtns = document.querySelectorAll(".copy-channel-btn")
+  copyBtns.forEach((btn) => {
+    btn.addEventListener("click", async function () {
+      const textToCopy = this.getAttribute("data-copy")
+      if (textToCopy) {
+        try {
+          await navigator.clipboard.writeText(textToCopy)
+          const originalIcon = this.innerHTML
+          this.innerHTML = '<i class="fa-solid fa-check" style="color: #22c55e;"></i>'
+          setTimeout(() => {
+            this.innerHTML = originalIcon
+          }, 2000)
+        } catch (err) {
+          console.error("Failed to copy:", err)
+        }
+      }
+    })
+  })
+
+  // Card 3D tilt & spotlight effect on mouse move
+  const techCards = document.querySelectorAll(".tech-project-card, .tech-skill-card, .highlight-card")
+  techCards.forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect()
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
+      card.style.setProperty("--mouse-x", `${x}px`)
+      card.style.setProperty("--mouse-y", `${y}px`)
+    })
+  })
+})
+
 // Load theme.js and text-animation.js at the end of the file
-document.write('<script src="/js/theme.js"></script>')
-document.write('<script src="/js/text-animation.js"></script>')
+if (!window.__scriptsLoaded) {
+  window.__scriptsLoaded = true
+  const themeScript = document.createElement("script")
+  themeScript.src = "/js/theme.js"
+  document.body.appendChild(themeScript)
+
+  const animScript = document.createElement("script")
+  animScript.src = "/js/text-animation.js"
+  document.body.appendChild(animScript)
+}

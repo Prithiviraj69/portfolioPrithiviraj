@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+    <linearGradient id="badgeGrad6" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgGrad6)"/>
+  <circle cx="700" cy="100" r="150" fill="#6366f1" opacity="0.15"/>
+  <circle cx="90" cy="350" r="150" fill="#ec4899" opacity="0.15"/>
+  
+  <rect x="50" y="50" width="180" height="32" rx="16" fill="url(#badgeGrad6)"/>
+  <text x="140" y="71" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">NEXT.JS &amp; GEMINI AI</text>
+  
+  <text x="50" y="150" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="bold" fill="#ffffff">Collaborative Document Editor</text>
+  <text x="50" y="185" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#cbd5e1">Local-First • diff3Merge • SSE • Drizzle ORM • IndexedDB</text>
+  
+  <g transform="translate(50, 240)">
+    <rect x="0" y="0" width="690" height="150" rx="12" fill="#1e293b" opacity="0.8" stroke="#475569" stroke-width="2"/>
+    <text x="30" y="45" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#f8fafc">• Notion-style offline-first editor writing instantly to IndexedDB</text>
+    <text x="30" y="80" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#f8fafc">• Deterministic diff3Merge conflict resolution with fractional indexing</text>
+    <text x="30" y="115" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#f8fafc">• Context-aware Gemini AI side-chat autocomplete &amp; content generation</text>
+  </g>
+</svg>

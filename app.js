@@ -13,6 +13,9 @@ import portfolioRoutes from "./routes/portfolio.js"
 // Middleware
 import { checkUser } from "./middleware/authMiddleware.js"
 
+// Seed
+import { seedResumeData } from "./seedData.js"
+
 dotenv.config()
 
 const __filename = fileURLToPath(import.meta.url)
@@ -31,10 +34,32 @@ app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, "views"))
 
 // Database connection
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("MongoDB connection error:", err))
+const connectDB = async () => {
+  const uri = process.env.MONGODB_URI
+  if (uri && uri !== "memory") {
+    try {
+      await mongoose.connect(uri, { serverSelectionTimeoutMS: 2000 })
+      console.log("Connected to MongoDB at " + uri)
+      await seedResumeData()
+      return
+    } catch (err) {
+      console.warn(`Could not connect to external MongoDB (${err.message}). Starting In-Memory MongoDB...`)
+    }
+  }
+
+  try {
+    const { MongoMemoryServer } = await import("mongodb-memory-server")
+    const mongod = await MongoMemoryServer.create()
+    const memoryUri = mongod.getUri()
+    await mongoose.connect(memoryUri)
+    console.log("Connected to In-Memory MongoDB at " + memoryUri)
+    await seedResumeData()
+  } catch (memErr) {
+    console.error("Failed to start in-memory MongoDB:", memErr)
+  }
+}
+
+connectDB()
 
 // Add this after the MongoDB connection to verify Cloudinary configuration
 if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {

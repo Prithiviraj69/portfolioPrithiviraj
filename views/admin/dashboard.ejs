@@ -1,58 +1,107 @@
 <%- include('../partials/header') %>
 
-<section class="admin-dashboard">
+<section class="admin-dashboard-section">
   <div class="container">
-    <div class="admin-header">
-      <h2>Admin Dashboard</h2>
-      <a href="/auth/logout" class="btn btn-outline">Logout</a>
-    </div>
-    
-    <div class="admin-nav">
-      <a href="/admin/dashboard" class="admin-nav-item active">Dashboard</a>
-      <a href="/admin/profile" class="admin-nav-item">Profile</a>
-      <a href="/admin/projects" class="admin-nav-item">Projects</a>
-      <a href="/admin/messages" class="admin-nav-item">Messages</a>
-    </div>
-    
-    <div class="dashboard-stats">
-      <div class="stat-card">
-        <div class="stat-icon">
-          <i class="fas fa-project-diagram"></i>
-        </div>
-        <div class="stat-info">
-          <h3>Projects</h3>
-          <p><%= locals.projectCount || 0 %></p>
-        </div>
+    <div class="admin-header-bar">
+      <div>
+        <div class="section-kicker">Administration Control</div>
+        <h2 class="admin-main-title">Engineering Dashboard</h2>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon">
-          <i class="fas fa-envelope"></i>
-        </div>
-        <div class="stat-info">
-          <h3>Messages</h3>
-          <p><%= locals.messageCount || 0 %></p>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">
-          <i class="fas fa-bell"></i>
-        </div>
-        <div class="stat-info">
-          <h3>Unread Messages</h3>
-          <p><%= locals.unreadMessageCount || 0 %></p>
-        </div>
+      <div class="admin-header-actions">
+        <a href="/" class="btn btn-pro-secondary" target="_blank">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Portfolio
+        </a>
+        <a href="/auth/logout" class="btn btn-pro-outline-danger">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        </a>
       </div>
     </div>
     
-    <div class="dashboard-actions">
-      <div class="action-card">
-        <h3>Quick Actions</h3>
-        <div class="action-links">
-          <a href="/admin/profile" class="btn btn-sm">Update Profile</a>
-          <a href="/admin/projects/add" class="btn btn-sm">Add New Project</a>
-          <a href="/admin/messages" class="btn btn-sm">Check Messages</a>
-          <a href="/" class="btn btn-sm" target="_blank">View Portfolio</a>
+    <div class="admin-nav-bar">
+      <a href="/admin/dashboard" class="admin-tab active"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+      <a href="/admin/profile" class="admin-tab"><i class="fa-solid fa-user-gear"></i> Profile &amp; Bio</a>
+      <a href="/admin/projects" class="admin-tab"><i class="fa-solid fa-layer-group"></i> Projects</a>
+      <a href="/admin/messages" class="admin-tab"><i class="fa-solid fa-inbox"></i> Messages</a>
+    </div>
+    
+    <!-- Modern Pro Metric Cards -->
+    <div class="admin-stats-grid">
+      <div class="admin-stat-card">
+        <div class="admin-stat-icon icon-cyan">
+          <i class="fa-solid fa-layer-group"></i>
         </div>
+        <div class="admin-stat-info">
+          <div class="stat-meta-label">Total Projects</div>
+          <div class="stat-number-display"><%= locals.projectCount || 0 %></div>
+          <div class="stat-subtext">Active portfolio deployments</div>
+        </div>
+      </div>
+
+      <div class="admin-stat-card">
+        <div class="admin-stat-icon icon-indigo">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <div class="admin-stat-info">
+          <div class="stat-meta-label">Total Messages</div>
+          <div class="stat-number-display"><%= locals.messageCount || 0 %></div>
+          <div class="stat-subtext">Inquiries received</div>
+        </div>
+      </div>
+
+      <div class="admin-stat-card">
+        <div class="admin-stat-icon icon-emerald">
+          <i class="fa-solid fa-bell"></i>
+        </div>
+        <div class="admin-stat-info">
+          <div class="stat-meta-label">Unread Messages</div>
+          <div class="stat-number-display"><%= locals.unreadMessageCount || 0 %></div>
+          <div class="stat-subtext">Awaiting review</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Admin Quick Management Deck -->
+    <div class="admin-management-deck">
+      <div class="deck-header">
+        <h3><i class="fa-solid fa-sliders"></i> Quick Operations</h3>
+        <p>Direct shortcuts to manage dynamic database records</p>
+      </div>
+      <div class="deck-actions-grid">
+        <a href="/admin/profile" class="deck-action-card">
+          <div class="dac-icon"><i class="fa-solid fa-address-card"></i></div>
+          <div class="dac-text">
+            <h4>Update Profile</h4>
+            <p>Modify bio, contact info, experience, and education</p>
+          </div>
+          <i class="fa-solid fa-chevron-right dac-arrow"></i>
+        </a>
+
+        <a href="/admin/projects/add" class="deck-action-card">
+          <div class="dac-icon"><i class="fa-solid fa-folder-plus"></i></div>
+          <div class="dac-text">
+            <h4>Add New Project</h4>
+            <p>Publish a new case study, architecture specs, and live URL</p>
+          </div>
+          <i class="fa-solid fa-chevron-right dac-arrow"></i>
+        </a>
+
+        <a href="/admin/projects" class="deck-action-card">
+          <div class="dac-icon"><i class="fa-solid fa-list-check"></i></div>
+          <div class="dac-text">
+            <h4>Manage Projects</h4>
+            <p>Edit or remove existing production deployments</p>
+          </div>
+          <i class="fa-solid fa-chevron-right dac-arrow"></i>
+        </a>
+
+        <a href="/admin/messages" class="deck-action-card">
+          <div class="dac-icon"><i class="fa-solid fa-inbox"></i></div>
+          <div class="dac-text">
+            <h4>Review Inquiries</h4>
+            <p>Inspect incoming messages and contact requests</p>
+          </div>
+          <i class="fa-solid fa-chevron-right dac-arrow"></i>
+        </a>
       </div>
     </div>
   </div>

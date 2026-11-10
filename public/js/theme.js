@@ -5,9 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const htmlElement = document.documentElement
     const themeIcons = document.querySelectorAll(".theme-toggle i")
   
-    // Check for saved theme preference or use the system preference
-    const savedTheme =
-      localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+    // Check for saved theme preference or default to dark for high-tech aesthetic
+    const savedTheme = localStorage.getItem("theme") || "dark"
   
     // Apply the saved theme
     setTheme(savedTheme)

@@ -182,3 +182,23 @@ export const seedResumeData = async () => {
     console.error("Error seeding resume data:", err)
   }
 }
+
+if (process.argv[1] && process.argv[1].endsWith("seedData.js")) {
+  import("dotenv").then(dotenv => dotenv.default.config()).then(async () => {
+    const mongoose = (await import("mongoose")).default
+    const uri = process.env.MONGODB_URI
+    if (!uri) {
+      console.error("MONGODB_URI not found in environment!")
+      process.exit(1)
+    }
+    console.log("Connecting to Atlas cluster:", uri.split("@").pop())
+    await mongoose.connect(uri)
+    await seedResumeData()
+    await mongoose.disconnect()
+    console.log("Seeding complete and disconnected successfully.")
+    process.exit(0)
+  }).catch(err => {
+    console.error("Seeding failed:", err)
+    process.exit(1)
+  })
+}
